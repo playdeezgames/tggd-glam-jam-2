@@ -1,6 +1,6 @@
 Public Interface IUIContext
     Sub Refresh()
     Sub HandleCommand(command As String)
-    ReadOnly Property Sfx As String()
-    Sub NextSfx()
+    ReadOnly Property CurrentEvent As String()
+    Sub NextEvent()
 End Interface

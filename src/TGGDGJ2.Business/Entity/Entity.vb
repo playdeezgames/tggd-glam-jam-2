@@ -3,10 +3,10 @@
 Public MustInherit Class Entity(Of TEntityData As EntityData)
     Implements IEntity
     Protected ReadOnly Property Data As WorldData
-    Protected ReadOnly Property PlaySfx As Action(Of String())
-    Sub New(data As WorldData, playSfx As Action(Of String()))
+    Protected ReadOnly Property DoEvent As Action(Of String())
+    Sub New(data As WorldData, doEvent As Action(Of String()))
         Me.Data = data
-        Me.PlaySfx = playSfx
+        Me.DoEvent = doEvent
     End Sub
 
     'Public Function GetMetadata(metadataType As String) As String Implements IEntity.GetMetadata
@@ -89,7 +89,7 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     'Protected MustOverride ReadOnly Property EntityData As TEntityData
     Public ReadOnly Property World As IWorld Implements IEntity.World
         Get
-            Return New World(Data, PlaySfx)
+            Return New World(Data, DoEvent)
         End Get
     End Property
 End Class

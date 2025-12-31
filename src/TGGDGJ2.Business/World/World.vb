@@ -3,19 +3,19 @@
 Public Class World
     Inherits Entity(Of WorldData)
     Implements IWorld
-    Sub New(data As WorldData, playSfx As Action(Of String()))
-        MyBase.New(data, playSfx)
+    Sub New(data As WorldData, doEvent As Action(Of String()))
+        MyBase.New(data, doEvent)
     End Sub
 
     'Public ReadOnly Property Locations As IEnumerable(Of ILocation) Implements IWorld.Locations
     '    Get
-    '        Return Enumerable.Range(0, Data.Locations.Count).Select(Function(x) New Location(Data, x, PlaySfx))
+    '        Return Enumerable.Range(0, Data.Locations.Count).Select(Function(x) New Location(Data, x, DoEvent))
     '    End Get
     'End Property
 
     'Public Property Avatar As ICharacter Implements IWorld.Avatar
     '    Get
-    '        Return If(Data.AvatarId.HasValue, New Character(Data, Data.AvatarId.Value, PlaySfx), Nothing)
+    '        Return If(Data.AvatarId.HasValue, New Character(Data, Data.AvatarId.Value, DoEvent), Nothing)
     '    End Get
     '    Set(value As ICharacter)
     '        If value Is Nothing Then
@@ -70,7 +70,7 @@ Public Class World
     '                             {
     '                                .LocationType = locationType
     '                             })
-    '    Dim result As ILocation = New Location(Data, locationId, PlaySfx)
+    '    Dim result As ILocation = New Location(Data, locationId, DoEvent)
     '    result.Initialize()
     '    Return result
     'End Function
@@ -82,7 +82,7 @@ Public Class World
     '                                .CharacterType = characterType,
     '                                .LocationId = location.LocationId
     '                             })
-    '    Dim result As ICharacter = New Character(Data, characterId, PlaySfx)
+    '    Dim result As ICharacter = New Character(Data, characterId, DoEvent)
     '    result.Initialize()
     '    location.AddCharacter(result)
     '    Return result
@@ -94,12 +94,12 @@ Public Class World
     '                             {
     '                                .ItemType = itemType
     '                             })
-    '    Dim result As IItem = New Item(Data, itemId, PlaySfx)
+    '    Dim result As IItem = New Item(Data, itemId, DoEvent)
     '    result.Initialize()
     '    Return result
     'End Function
 
     'Public Function GetItem(itemId As Integer) As IItem Implements IWorld.GetItem
-    '    Return New Item(Data, itemId, PlaySfx)
+    '    Return New Item(Data, itemId, DoEvent)
     'End Function
 End Class

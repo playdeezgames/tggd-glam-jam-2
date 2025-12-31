@@ -10,11 +10,11 @@ Public Class UIContext
     Private ReadOnly worldData As New WorldData
     Private ReadOnly Property World As IWorld
         Get
-            Return New Business.World(worldData, AddressOf PlaySfx)
+            Return New Business.World(worldData, AddressOf DoEvent)
         End Get
     End Property
 
-    Public ReadOnly Property Sfx As String() Implements IUIContext.Sfx
+    Public ReadOnly Property CurrentEvent As String() Implements IUIContext.CurrentEvent
         Get
             Return If(sfxQueue.Any, sfxQueue.Peek, Nothing)
         End Get
@@ -22,9 +22,9 @@ Public Class UIContext
 
     Sub New(columns As Integer, rows As Integer, pixelBuffer As Integer())
         Me.buffer = New UIBuffer(Of Integer)(columns, rows, pixelBuffer)
-        state = New TitleState(buffer, World, AddressOf PlaySfx)
+        state = New TitleState(buffer, World, AddressOf DoEvent)
     End Sub
-    Private Sub PlaySfx(ParamArray sfx As String())
+    Private Sub DoEvent(ParamArray sfx As String())
         sfxQueue.Enqueue(sfx)
     End Sub
 
@@ -36,7 +36,7 @@ Public Class UIContext
         state = state.HandleCommand(command)
     End Sub
 
-    Public Sub NextSfx() Implements IUIContext.NextSfx
+    Public Sub NextEvent() Implements IUIContext.NextEvent
         If sfxQueue.Any Then
             sfxQueue.Dequeue()
         End If

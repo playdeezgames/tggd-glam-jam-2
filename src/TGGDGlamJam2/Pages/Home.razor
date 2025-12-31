@@ -4,10 +4,10 @@
 <PageTitle>Gummies of SPLORR!!</PageTitle>
 
 <table class="trs80-table" tabindex="1" @onkeydown="HandleKeyDownAsync" @onkeydown:preventDefault="ShouldPreventDefault" autofocus>
-	@foreach (var row in Enumerable.Range(0, CHARACTER_ROWS))
+	@foreach (var row in Enumerable.Range(0, CHARACTER_DESTINATION_ROWS))
 	{
 		<tr>
-			@foreach (var column in Enumerable.Range(0, CHARACTER_COLUMNS))
+			@foreach (var column in Enumerable.Range(0, CHARACTER_DESTINATION_COLUMNS))
 			{
 				<td class="trs80-td" style="background-position: @GetBackgroundPosition(column, row)"></td>
 			}
@@ -15,33 +15,33 @@
 	}
 </table>
 @code {
-	IUIContext context = new UIContext(CHARACTER_COLUMNS, CHARACTER_ROWS, FrameBuffer);
-	const int CHARACTER_COLUMNS = 48;
+	IUIContext context = new UIContext(CHARACTER_DESTINATION_COLUMNS, CHARACTER_DESTINATION_ROWS, FrameBuffer);
+	const int CHARACTER_DESTINATION_COLUMNS = 48;
 	const int CHARACTER_SOURCE_COLUMNS = 32;
-	const int CHARACTER_ROWS = 20;
-	const int CHARACTER_WIDTH = 32;
-	const int CHARACTER_HEIGHT = 48;
-	static int[] FrameBuffer = new int[CHARACTER_ROWS * CHARACTER_COLUMNS];
+	const int CHARACTER_DESTINATION_ROWS = 20;
+	const int CHARACTER_PIXEL_WIDTH = 32;
+	const int CHARACTER_PIXEL_HEIGHT = 48;
+	static int[] FrameBuffer = new int[CHARACTER_DESTINATION_ROWS * CHARACTER_DESTINATION_COLUMNS];
 	private bool ShouldPreventDefault = false;
 	string GetBackgroundPosition(int column, int row)
 	{
-		int character = FrameBuffer[column + row * CHARACTER_COLUMNS];
-		int characterX = -(character % CHARACTER_SOURCE_COLUMNS) * CHARACTER_WIDTH;
-		int characterY = -(character / CHARACTER_SOURCE_COLUMNS) * CHARACTER_HEIGHT;
+		int character = FrameBuffer[column + row * CHARACTER_DESTINATION_COLUMNS];
+		int characterX = -(character % CHARACTER_SOURCE_COLUMNS) * CHARACTER_PIXEL_WIDTH;
+		int characterY = -(character / CHARACTER_SOURCE_COLUMNS) * CHARACTER_PIXEL_HEIGHT;
 		return $"{characterX}px {characterY}px";
 	}
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
 		context.Refresh();
-		await ProcessSfxAsync();
+		await DoEventAsync();
 	}
-	private async Task ProcessSfxAsync()
+	private async Task DoEventAsync()
 	{
-		while (context.Sfx != null)
+		while (context.CurrentEvent != null)
 		{
-			await JSRuntime.InvokeVoidAsync("playSfx", context.Sfx);
-			context.NextSfx();
+			await JSRuntime.InvokeVoidAsync("doEvent", context.CurrentEvent);
+			context.NextEvent();
 		}
 	}
 	readonly IReadOnlyDictionary<string, string> CommandTable = new Dictionary<string, string>()
@@ -68,7 +68,7 @@
 			ShouldPreventDefault = true;
 			context!.HandleCommand(command);
 			context!.Refresh();
-			await ProcessSfxAsync();
+			await DoEventAsync();
 		}
 		else
 		{
