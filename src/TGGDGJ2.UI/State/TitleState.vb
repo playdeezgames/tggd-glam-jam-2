@@ -16,6 +16,14 @@ Friend Class TitleState
 
     Public Sub Refresh() Implements IUIState.Refresh
         buffer.Fill(32)
+        buffer.Fill(1, 0, buffer.Columns - 2, 1, 10)
+        buffer.Fill(1, 2, buffer.Columns - 2, 1, 10)
+        buffer.SetPixel(0, 0, 6)
+        buffer.SetPixel(0, 1, 5)
+        buffer.SetPixel(0, 2, 3)
+        buffer.SetPixel(buffer.Columns - 1, 0, 12)
+        buffer.SetPixel(buffer.Columns - 1, 1, 5)
+        buffer.SetPixel(buffer.Columns - 1, 2, 9)
         buffer.WriteCenteredText(1, "Gummies of SPLORR!!", 0)
         buffer.WriteCenteredText(3, "A Production of TheGrumpyGameDev", 0)
         buffer.WriteCenteredText(4, "For Glam Jam #2", 0)
