@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="ImagePooper/ImagePooper.vbproj" Id="6bb9222f-a829-46c6-9a51-b55fe03159be" />
   <Project Path="TGGD.Business/TGGD.Business.vbproj" />
   <Project Path="TGGD.UI/TGGD.UI.vbproj" />
   <Project Path="TGGDGJ2.Business/TGGDGJ2.Business.vbproj" />

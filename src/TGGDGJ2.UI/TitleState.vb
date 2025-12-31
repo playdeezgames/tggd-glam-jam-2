@@ -15,7 +15,7 @@ Friend Class TitleState
     End Sub
 
     Public Sub Refresh() Implements IUIState.Refresh
-        buffer.Fill(MagentaBlock)
+        buffer.Fill(32)
         buffer.WriteCenteredText(1, "GUMMIES OF SPLORR!!")
         buffer.WriteCenteredText(3, "A PRODUCTION OF THEGRUMPYGAMEDEV")
         buffer.WriteCenteredText(4, "FOR GLAM JAM #2")
@@ -26,7 +26,6 @@ Friend Class TitleState
         buffer.WriteCenteredText(10, "SPACE: ACTION")
         buffer.WriteCenteredText(11, "BACKSPACE: CANCEL")
         buffer.WriteCenteredText(buffer.Rows - 1, "         PRESS <ACTION>         ")
-        buffer.Invert(0, buffer.Rows - 1, buffer.Columns, 1)
     End Sub
 
     Public Function HandleCommand(command As String) As IUIState Implements IUIState.HandleCommand
