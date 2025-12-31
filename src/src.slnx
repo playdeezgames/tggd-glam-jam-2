@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="TGGD.Business/TGGD.Business.vbproj" />
+  <Project Path="TGGD.UI/TGGD.UI.vbproj" />
+  <Project Path="TGGDGJ2.Business/TGGDGJ2.Business.vbproj" />
+  <Project Path="TGGDGJ2.Data/TGGDGJ2.Data.vbproj" />
+  <Project Path="TGGDGJ2.UI/TGGDGJ2.UI.vbproj" />
+  <Project Path="TGGDGlamJam2/TGGDGlamJam2.csproj" />
+</Solution>
