@@ -2,28 +2,22 @@
 Imports TGGDGJ2.Business
 
 Friend Class TitleState
-    Implements IUIState
+    Inherits BaseState
 
-    Private ReadOnly buffer As IUIBuffer(Of Integer)
-    Private ReadOnly world As IWorld
-    Private ReadOnly doEvent As Action(Of String)
-
-    Public Sub New(buffer As IUIBuffer(Of Integer), world As IWorld, doEvent As Action(Of String))
-        Me.buffer = buffer
-        Me.world = world
-        Me.doEvent = doEvent
+    Public Sub New(buffer As IUIBuffer(Of Integer), world As IWorld, doEvent As Action(Of String()))
+        MyBase.New(buffer, world, doEvent)
     End Sub
 
-    Public Sub Refresh() Implements IUIState.Refresh
+    Public Overrides Sub Refresh()
         buffer.Fill(32)
-        buffer.Fill(1, 0, buffer.Columns - 2, 1, 10)
-        buffer.Fill(1, 2, buffer.Columns - 2, 1, 10)
-        buffer.SetPixel(0, 0, 6)
-        buffer.SetPixel(0, 1, 5)
-        buffer.SetPixel(0, 2, 3)
-        buffer.SetPixel(buffer.Columns - 1, 0, 12)
-        buffer.SetPixel(buffer.Columns - 1, 1, 5)
-        buffer.SetPixel(buffer.Columns - 1, 2, 9)
+        buffer.Fill(1, 0, buffer.Columns - 2, 1, BORDER_EW)
+        buffer.Fill(1, 2, buffer.Columns - 2, 1, BORDER_EW)
+        buffer.SetPixel(0, 0, BORDER_ES)
+        buffer.SetPixel(0, 1, BORDER_NS)
+        buffer.SetPixel(0, 2, BORDER_NE)
+        buffer.SetPixel(buffer.Columns - 1, 0, BORDER_SW)
+        buffer.SetPixel(buffer.Columns - 1, 1, BORDER_NS)
+        buffer.SetPixel(buffer.Columns - 1, 2, BORDER_NW)
         buffer.WriteCenteredText(1, "Gummies of SPLORR!!", 0)
         buffer.WriteCenteredText(3, "A Production of TheGrumpyGameDev", 0)
         buffer.WriteCenteredText(4, "For Glam Jam #2", 0)
@@ -37,10 +31,10 @@ Friend Class TitleState
         buffer.WriteCenteredText(buffer.Rows - 1, "Press <Action>", 0)
     End Sub
 
-    Public Function HandleCommand(command As String) As IUIState Implements IUIState.HandleCommand
+    Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
             Case UI.Command.Green
-                Return New TitleState(buffer, world, doEvent) 'TODO: main menu!
+                Return New MainMenuState(buffer, world, doEvent) 'TODO: main menu!
             Case Else
                 Return Me
         End Select
