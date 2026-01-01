@@ -7,12 +7,13 @@ Friend Class MainMenuState
     Public Sub New(
                   buffer As IUIBuffer(Of Integer),
                   world As Business.IWorld,
-                  doEvent As Action(Of String()))
+                  doEvent As Action(Of String()),
+                  choiceIndex As Integer)
         MyBase.New(
             buffer,
             world,
             doEvent,
-            0,
+            choiceIndex,
             MakeChoices(buffer, world, doEvent))
     End Sub
 
@@ -21,9 +22,9 @@ Friend Class MainMenuState
                                 world As Business.IWorld,
                                 doEvent As Action(Of String())) As IEnumerable(Of Choice)
         Return {
-            New Choice("Embark!", Function() Nothing),
-            New Choice("Story", Function() Nothing),
-            New Choice("About", Function() Nothing)
+            New Choice("Embark!", Function() New EmbarkMenu(buffer, world, doEvent)),
+            New Choice("Story", Function() New StoryMenu(buffer, world, doEvent)),
+            New Choice("About", Function() New AboutMenu(buffer, world, doEvent))
             }
     End Function
 End Class

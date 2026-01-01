@@ -10,14 +10,15 @@ Friend Class TitleState
 
     Public Overrides Sub Refresh()
         buffer.Fill(32)
-        buffer.Fill(1, 0, buffer.Columns - 2, 1, BORDER_EW)
-        buffer.Fill(1, 2, buffer.Columns - 2, 1, BORDER_EW)
-        buffer.SetPixel(0, 0, BORDER_ES)
-        buffer.SetPixel(0, 1, BORDER_NS)
-        buffer.SetPixel(0, 2, BORDER_NE)
-        buffer.SetPixel(buffer.Columns - 1, 0, BORDER_SW)
-        buffer.SetPixel(buffer.Columns - 1, 1, BORDER_NS)
-        buffer.SetPixel(buffer.Columns - 1, 2, BORDER_NW)
+        buffer.Box((0, 0), (buffer.Columns, 3))
+        'buffer.Fill(1, 0, buffer.Columns - 2, 1, BORDER_EW)
+        'buffer.Fill(1, 2, buffer.Columns - 2, 1, BORDER_EW)
+        'buffer.SetPixel(0, 0, BORDER_ES)
+        'buffer.SetPixel(0, 1, BORDER_NS)
+        'buffer.SetPixel(0, 2, BORDER_NE)
+        'buffer.SetPixel(buffer.Columns - 1, 0, BORDER_SW)
+        'buffer.SetPixel(buffer.Columns - 1, 1, BORDER_NS)
+        'buffer.SetPixel(buffer.Columns - 1, 2, BORDER_NW)
         buffer.WriteCenteredText(1, "Gummies of SPLORR!!", 0)
         buffer.WriteCenteredText(3, "A Production of TheGrumpyGameDev", 0)
         buffer.WriteCenteredText(4, "For Glam Jam #2", 0)
@@ -34,7 +35,7 @@ Friend Class TitleState
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
             Case UI.Command.Green
-                Return New MainMenuState(buffer, world, doEvent) 'TODO: main menu!
+                Return New MainMenuState(buffer, world, doEvent, 0)
             Case Else
                 Return Me
         End Select
