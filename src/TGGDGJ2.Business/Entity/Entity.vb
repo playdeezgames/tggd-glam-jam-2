@@ -9,6 +9,8 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         Me.DoEvent = doEvent
     End Sub
 
+    Protected MustOverride ReadOnly Property EntityData As TEntityData
+
     Public Overridable Sub Clear() Implements IEntity.Clear
         'TODO: clear
     End Sub

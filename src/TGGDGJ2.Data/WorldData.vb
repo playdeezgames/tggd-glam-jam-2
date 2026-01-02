@@ -1,8 +1,7 @@
 Public Class WorldData
     Inherits EntityData
-    'Public Property Locations As New List(Of LocationData)
-    'Public Property Characters As New List(Of CharacterData)
-    'Public Property AvatarId As Integer?
-    'Public Property Messages As New List(Of MessageData)
-    'Public Property Items As New List(Of ItemData)
+    Public Property Maps As New Dictionary(Of Guid, MapData)
+    Public Property Locations As New Dictionary(Of Guid, LocationData)
+    Public Property Characters As New Dictionary(Of Guid, CharacterData)
+    Public Property AvatarCharacterId As Guid
 End Class

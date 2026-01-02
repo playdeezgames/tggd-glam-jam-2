@@ -18,8 +18,11 @@ Friend Class EmbarkMenu
 
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
-            Case Green, Red, Blue
+            Case Red
                 Return New MainMenuState(buffer, world, doEvent, 0)
+            Case Green, Blue
+                world.Initialize()
+                Return InPlayState.DetermineNextState(buffer, world, doEvent)
             Case Else
                 Return Me
         End Select
