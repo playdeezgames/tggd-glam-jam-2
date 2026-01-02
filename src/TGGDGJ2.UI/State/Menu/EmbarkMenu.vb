@@ -18,7 +18,7 @@ Friend Class EmbarkMenu
 
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
-            Case Green, Red
+            Case Green, Red, Blue
                 Return New MainMenuState(buffer, world, doEvent, 0)
             Case Else
                 Return Me

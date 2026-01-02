@@ -31,6 +31,21 @@
         Fill(0, 0, columns, rows, hue)
     End Sub
 
+    Public Sub VLine(column As Integer, row As Integer, rows As Integer, hue As TPixel) Implements IUIBuffer(Of TPixel).VLine
+        Fill(column, row, 1, rows, hue)
+    End Sub
+
+    Public Sub HLine(column As Integer, row As Integer, columns As Integer, hue As TPixel) Implements IUIBuffer(Of TPixel).HLine
+        Fill(column, row, columns, 1, hue)
+    End Sub
+
+    Public Sub Box(column As Integer, row As Integer, columns As Integer, rows As Integer, hue As TPixel) Implements IUIBuffer(Of TPixel).Box
+        HLine(column, row, columns, hue)
+        HLine(column, row + rows - 1, columns, hue)
+        VLine(column, row, rows, hue)
+        VLine(column + columns - 1, row, rows, hue)
+    End Sub
+
     Public Function GetPixel(column As Integer, row As Integer) As TPixel Implements IUIBuffer(Of TPixel).GetPixel
         If column >= 0 AndAlso column < Columns AndAlso row >= 0 AndAlso row < Rows Then
             Return pixelBuffer(column + row * Columns)

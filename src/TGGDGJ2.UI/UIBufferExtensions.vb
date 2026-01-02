@@ -30,14 +30,29 @@ Friend Module UIBufferExtensions
         WriteText(buffer, ((buffer.Columns - text.Length) \ 2, row), text, page)
     End Function
     <Extension>
-    Friend Sub Box(buffer As IUIBuffer(Of Integer), position As (Column As Integer, Row As Integer), size As (Columns As Integer, Rows As Integer))
-        buffer.Fill(position.Column + 1, position.Row, size.Columns - 2, 1, BORDER_EW)
-        buffer.Fill(position.Column + 1, position.Row + size.Rows - 1, size.Columns - 2, 1, BORDER_EW)
-        buffer.SetPixel(position.Column, position.Row, BORDER_ES)
-        buffer.Fill(position.Column, position.Row + 1, 1, size.Rows - 2, BORDER_NS)
-        buffer.SetPixel(position.Column, position.Row + size.Rows - 1, BORDER_NE)
-        buffer.SetPixel(position.Column + size.Columns - 1, position.Row, BORDER_SW)
-        buffer.Fill(position.Column + size.Columns - 1, position.Row + 1, 1, size.Rows - 2, BORDER_NS)
-        buffer.SetPixel(position.Column + size.Columns - 1, position.Row + size.Rows - 1, BORDER_NW)
+    Friend Sub DrawFrame(
+                        buffer As IUIBuffer(Of Integer),
+                        position As (Column As Integer, Row As Integer),
+                        frame As IUIBuffer(Of Boolean))
+        For Each x In Enumerable.Range(0, frame.Columns)
+            For Each y In Enumerable.Range(0, frame.Rows)
+                If frame.GetPixel(x, y) Then
+                    Dim hue = 0
+                    If frame.GetPixel(x, y - 1) Then
+                        hue += 1
+                    End If
+                    If frame.GetPixel(x + 1, y) Then
+                        hue += 2
+                    End If
+                    If frame.GetPixel(x, y + 1) Then
+                        hue += 4
+                    End If
+                    If frame.GetPixel(x - 1, y) Then
+                        hue += 8
+                    End If
+                    buffer.SetPixel(x + position.Column, y + position.Row, hue)
+                End If
+            Next
+        Next
     End Sub
 End Module
