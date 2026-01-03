@@ -9,7 +9,7 @@
     End Sub
 
     Public Overrides Function GetHue(location As ILocation) As Integer
-        Return Asc("#")
+        Return Hue.WALL
     End Function
 
     Friend Shared ReadOnly Name As String = NameOf(WallLocationType)

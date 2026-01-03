@@ -12,6 +12,6 @@
     End Sub
 
     Public Overrides Function GetHue(character As ICharacter) As Integer
-        Return Asc("@")
+        Return Hue.N00B
     End Function
 End Class
