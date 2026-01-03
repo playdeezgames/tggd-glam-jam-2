@@ -1,8 +1,7 @@
-﻿Imports System.Xml
-Imports TGGDGJ2.Data
+﻿Imports TGGDGJ2.Data
 
 Friend Class Location
-    Inherits Entity(Of LocationData)
+    Inherits TypedEntity(Of LocationData, ILocationType)
     Implements ILocation
 
 
@@ -12,6 +11,30 @@ Friend Class Location
     End Sub
 
     Public ReadOnly Property LocationId As Guid Implements ILocation.LocationId
+
+    Public Overrides ReadOnly Property EntityType As ILocationType
+        Get
+            Return World.GetLocationType(EntityTypeName)
+        End Get
+    End Property
+
+    Public ReadOnly Property Character As ICharacter Implements ILocation.Character
+        Get
+            Return If(EntityData.CharacterId <> Guid.Empty, New Character(Data, EntityData.CharacterId, DoEvent), Nothing)
+        End Get
+    End Property
+
+    Public ReadOnly Property Hue As Integer Implements ILocation.Hue
+        Get
+            Return EntityType.GetHue(Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property Map As IMap Implements ILocation.Map
+        Get
+            Return If(EntityData.MapId <> Guid.Empty, New Map(Data, EntityData.MapId, DoEvent), Nothing)
+        End Get
+    End Property
 
     Protected Overrides ReadOnly Property EntityData As LocationData
         Get
@@ -23,9 +46,11 @@ Friend Class Location
         Dim characterId = Guid.NewGuid
         Dim characterData = New CharacterData With
             {
+                .EntityTypeName = characterType.CharacterTypeName,
                 .LocationId = LocationId
             }
         Data.Characters(characterId) = characterData
+        EntityData.CharacterId = characterId
         Dim result As ICharacter = New Character(Data, characterId, DoEvent)
         characterType.Initialize(result)
         Return result

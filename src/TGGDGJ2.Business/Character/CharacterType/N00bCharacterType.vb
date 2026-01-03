@@ -10,4 +10,8 @@
     Public Sub New()
         MyBase.New(Name)
     End Sub
+
+    Public Overrides Function GetHue(character As ICharacter) As Integer
+        Return Asc("@")
+    End Function
 End Class

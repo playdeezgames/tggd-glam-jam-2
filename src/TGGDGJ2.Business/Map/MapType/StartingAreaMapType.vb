@@ -1,4 +1,6 @@
-﻿Friend Class StartingAreaMapType
+﻿Imports System.Data.Common
+
+Friend Class StartingAreaMapType
     Inherits MapType
 
     Private Sub New()
@@ -7,7 +9,15 @@
 
     Public Overrides Sub Initialize(map As IMap)
         For Each column In Enumerable.Range(0, map.Columns)
-            For Each row In Enumerable.Range(0, map.Rows)
+            map.CreateLocation(column, 0, WallLocationType.Instance)
+            map.CreateLocation(column, map.Rows - 1, WallLocationType.Instance)
+        Next
+        For Each row In Enumerable.Range(1, map.Rows - 2)
+            map.CreateLocation(0, row, WallLocationType.Instance)
+            map.CreateLocation(map.Columns - 1, row, WallLocationType.Instance)
+        Next
+        For Each column In Enumerable.Range(1, map.Columns - 2)
+            For Each row In Enumerable.Range(1, map.Rows - 2)
                 map.CreateLocation(column, row, FloorLocationType.Instance)
             Next
         Next

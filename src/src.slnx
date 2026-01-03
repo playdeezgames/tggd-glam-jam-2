@@ -1,15 +1,19 @@
 <Solution>
+  <Folder Name="/Base/">
+    <Project Path="TGGD.Business/TGGD.Business.vbproj" />
+    <Project Path="TGGD.UI/TGGD.UI.vbproj" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path="../shippit.sh" />
     <File Path=".editorconfig" />
     <File Path="ImagePooper/bin/Debug/net10.0/output.txt" />
     <File Path="TGGDGlamJam2/wwwroot/css/app.css" />
   </Folder>
-  <Project Path="ImagePooper/ImagePooper.vbproj" Id="6bb9222f-a829-46c6-9a51-b55fe03159be" />
-  <Project Path="TGGD.Business/TGGD.Business.vbproj" />
-  <Project Path="TGGD.UI/TGGD.UI.vbproj" />
+  <Folder Name="/Utility/">
+    <Project Path="ImagePooper/ImagePooper.vbproj" Id="6bb9222f-a829-46c6-9a51-b55fe03159be" />
+    <Project Path="TGGDGlamJam2/TGGDGlamJam2.csproj" />
+  </Folder>
   <Project Path="TGGDGJ2.Business/TGGDGJ2.Business.vbproj" />
   <Project Path="TGGDGJ2.Data/TGGDGJ2.Data.vbproj" />
   <Project Path="TGGDGJ2.UI/TGGDGJ2.UI.vbproj" />
-  <Project Path="TGGDGlamJam2/TGGDGlamJam2.csproj" />
 </Solution>

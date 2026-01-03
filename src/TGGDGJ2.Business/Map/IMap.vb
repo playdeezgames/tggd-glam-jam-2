@@ -1,5 +1,5 @@
 ﻿Public Interface IMap
-    Inherits IEntity
+    Inherits ITypedEntity(Of IMapType)
     ReadOnly Property MapId As Guid
     ReadOnly Property Columns As Integer
     ReadOnly Property Rows As Integer

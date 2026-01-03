@@ -7,4 +7,5 @@
     Public ReadOnly Property LocationTypeName As String Implements ILocationType.LocationTypeName
 
     Public MustOverride Sub Initialize(result As ILocation) Implements ILocationType.Initialize
+    Public MustOverride Function GetHue(location As ILocation) As Integer Implements ILocationType.GetHue
 End Class

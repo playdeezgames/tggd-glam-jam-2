@@ -1,6 +1,7 @@
-﻿Friend Class FloorLocationType
+﻿Friend Class WallLocationType
     Inherits LocationType
-    Private Sub New()
+
+    Public Sub New()
         MyBase.New(Name)
     End Sub
 
@@ -8,9 +9,9 @@
     End Sub
 
     Public Overrides Function GetHue(location As ILocation) As Integer
-        Return Asc(" ")
+        Return Asc("#")
     End Function
 
-    Friend Shared ReadOnly Name As String = NameOf(FloorLocationType)
-    Friend Shared ReadOnly Instance As ILocationType = New FloorLocationType
+    Friend Shared ReadOnly Name As String = NameOf(WallLocationType)
+    Friend Shared ReadOnly Instance As ILocationType = New WallLocationType
 End Class

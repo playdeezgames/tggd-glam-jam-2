@@ -1,7 +1,7 @@
 ﻿Imports TGGDGJ2.Data
 
 Friend Class Map
-    Inherits Entity(Of MapData)
+    Inherits TypedEntity(Of MapData, IMapType)
     Implements IMap
 
     Public Sub New(data As WorldData, mapId As Guid, doEvent As Action(Of String()))
@@ -23,6 +23,12 @@ Friend Class Map
         End Get
     End Property
 
+    Public Overrides ReadOnly Property EntityType As IMapType
+        Get
+            Return World.GetMapType(EntityTypeName)
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As MapData
         Get
             Return Data.Maps(MapId)
@@ -33,6 +39,7 @@ Friend Class Map
         Dim locationId = Guid.NewGuid
         Dim locationData As New LocationData With
             {
+                .EntityTypeName = locationType.LocationTypeName,
                 .MapId = MapId,
                 .Column = column,
                 .Row = row

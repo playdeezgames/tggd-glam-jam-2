@@ -39,6 +39,7 @@ Public Class World
         Dim mapId = Guid.NewGuid()
         Dim mapData As New MapData With
             {
+                .EntityTypeName = mapType.MapTypeName,
                 .Columns = mapType.Columns,
                 .Rows = mapType.Rows,
                 .LocationIds = Enumerable.Repeat(Guid.Empty, mapType.Columns * mapType.Rows).ToList
@@ -70,7 +71,8 @@ Public Class World
     Private Shared ReadOnly locationTypes As IReadOnlyDictionary(Of String, ILocationType) =
         New List(Of ILocationType) From
         {
-            FloorLocationType.Instance
+            FloorLocationType.Instance,
+            WallLocationType.Instance
         }.ToDictionary(Function(x) x.LocationTypeName, Function(x) x)
 
     Private Shared ReadOnly characterTypes As IReadOnlyDictionary(Of String, ICharacterType) =
