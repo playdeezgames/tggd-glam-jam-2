@@ -29,7 +29,7 @@ Friend Class Map
         End Get
     End Property
 
-    Public Function CreateLocation(column As Integer, row As Integer, locationType As ILocationTypeDescriptor) As ILocation Implements IMap.CreateLocation
+    Public Function CreateLocation(column As Integer, row As Integer, locationType As ILocationType) As ILocation Implements IMap.CreateLocation
         Dim locationId = Guid.NewGuid
         Dim locationData As New LocationData With
             {

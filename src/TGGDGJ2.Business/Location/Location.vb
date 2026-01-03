@@ -19,7 +19,7 @@ Friend Class Location
         End Get
     End Property
 
-    Public Function CreateCharacter(characterType As ICharacterTypeDescriptor) As ICharacter Implements ILocation.CreateCharacter
+    Public Function CreateCharacter(characterType As ICharacterType) As ICharacter Implements ILocation.CreateCharacter
         Dim characterId = Guid.NewGuid
         Dim characterData = New CharacterData With
             {
