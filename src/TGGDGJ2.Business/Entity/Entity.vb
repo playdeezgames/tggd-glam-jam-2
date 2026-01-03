@@ -15,6 +15,27 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         'TODO: clear
     End Sub
 
+    Public Function CreateCounter(counterName As String, initialValue As Integer, minimumValue As Integer, maximumValue As Integer) As ICounter Implements IEntity.CreateCounter
+        Dim counterId As Guid = Guid.NewGuid
+        Dim counterData As New CounterData With
+            {
+                .Value = initialValue,
+                .Maximum = maximumValue,
+                .Minimum = minimumValue
+            }
+        Data.Counters(counterId) = counterData
+        EntityData.EntityCounters(counterName) = counterId
+        Return New Counter(Data, counterId, DoEvent)
+    End Function
+
+    Public Function GetCounter(counterName As String) As ICounter Implements IEntity.GetCounter
+        Dim counterId As Guid = Guid.Empty
+        If EntityData.EntityCounters.TryGetValue(counterName, counterId) Then
+            Return New Counter(Data, counterId, DoEvent)
+        End If
+        Return Nothing
+    End Function
+
     Public ReadOnly Property World As IWorld Implements IEntity.World
         Get
             Return New World(Data, DoEvent)

@@ -2,6 +2,8 @@
     Inherits CharacterType
 
     Public Overrides Sub Initialize(character As ICharacter)
+        character.CreateCounter(Counters.Satiety, 100, 0, 100)
+        character.CreateCounter(Counters.Health, 100, 0, 100)
     End Sub
 
     Friend Shared ReadOnly Name As String = NameOf(N00bCharacterType)

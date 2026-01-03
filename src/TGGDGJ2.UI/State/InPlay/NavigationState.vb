@@ -5,7 +5,8 @@ Imports TGGDGJ2.Business
 Friend Class NavigationState
     Inherits BaseState
     Implements IUIState
-    Const OFFSET_COLUMN = 1
+    Const MAP_OFFSET_COLUMN = 1
+    Const STATUS_OFFSET_COLUMN = 34
     Const OFFSET_ROW = 1
 
     Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String()))
@@ -19,7 +20,7 @@ Friend Class NavigationState
         buffer.DrawFrame((0, 0), frame)
         Dim map = world.Avatar.Map
         For Each column In Enumerable.Range(0, map.Columns)
-            Dim plotX = OFFSET_COLUMN + column
+            Dim plotX = MAP_OFFSET_COLUMN + column
             For Each row In Enumerable.Range(0, map.Rows)
                 Dim plotY = OFFSET_ROW + row
                 Dim location = map.GetLocation(column, row)
@@ -33,6 +34,12 @@ Friend Class NavigationState
                 buffer.SetPixel(plotX, plotY, hue)
             Next
         Next
+        buffer.WriteText((STATUS_OFFSET_COLUMN, OFFSET_ROW), Counters.Health, 0)
+        Dim health = world.Avatar.GetCounter(Counters.Health)
+        buffer.WriteText((STATUS_OFFSET_COLUMN, OFFSET_ROW + 1), $"{health.Value}/{health.Maximum}", 0)
+        buffer.WriteText((STATUS_OFFSET_COLUMN, OFFSET_ROW + 2), Counters.Satiety, 0)
+        Dim satiety = world.Avatar.GetCounter(Counters.Satiety)
+        buffer.WriteText((STATUS_OFFSET_COLUMN, OFFSET_ROW + 3), $"{satiety.Value}/{satiety.Maximum}", 0)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState
