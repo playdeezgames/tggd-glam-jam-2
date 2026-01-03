@@ -15,6 +15,6 @@
         map.World.Avatar = location.CreateCharacter(N00bCharacterType.Instance)
     End Sub
 
-    Friend Shared ReadOnly Instance As New StartingAreaMapType
     Friend Shared ReadOnly Name As String = NameOf(StartingAreaMapType)
+    Friend Shared ReadOnly Instance As New StartingAreaMapType
 End Class

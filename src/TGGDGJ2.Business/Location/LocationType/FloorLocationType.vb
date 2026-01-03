@@ -7,6 +7,6 @@
     Public Overrides Sub Initialize(result As ILocation)
     End Sub
 
-    Friend Shared ReadOnly Instance As ILocationType = New FloorLocationType
     Friend Shared ReadOnly Name As String = NameOf(FloorLocationType)
+    Friend Shared ReadOnly Instance As ILocationType = New FloorLocationType
 End Class
