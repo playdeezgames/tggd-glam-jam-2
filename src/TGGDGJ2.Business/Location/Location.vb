@@ -18,10 +18,13 @@ Friend Class Location
         End Get
     End Property
 
-    Public ReadOnly Property Character As ICharacter Implements ILocation.Character
+    Public Property Character As ICharacter Implements ILocation.Character
         Get
             Return If(EntityData.CharacterId <> Guid.Empty, New Character(Data, EntityData.CharacterId, DoEvent), Nothing)
         End Get
+        Set(value As ICharacter)
+            EntityData.CharacterId = If(value?.CharacterId, Guid.Empty)
+        End Set
     End Property
 
     Public ReadOnly Property Hue As Integer Implements ILocation.Hue
@@ -33,6 +36,18 @@ Friend Class Location
     Public ReadOnly Property Map As IMap Implements ILocation.Map
         Get
             Return If(EntityData.MapId <> Guid.Empty, New Map(Data, EntityData.MapId, DoEvent), Nothing)
+        End Get
+    End Property
+
+    Public ReadOnly Property Column As Integer Implements ILocation.Column
+        Get
+            Return EntityData.Column
+        End Get
+    End Property
+
+    Public ReadOnly Property Row As Integer Implements ILocation.Row
+        Get
+            Return EntityData.Row
         End Get
     End Property
 

@@ -32,13 +32,20 @@ Friend Class Character
         End Get
     End Property
 
-    Public ReadOnly Property Location As ILocation Implements ICharacter.Location
+    Public Property Location As ILocation Implements ICharacter.Location
         Get
             Return If(
                 EntityData.LocationId <> Guid.Empty,
                 New Location(Data, EntityData.LocationId, DoEvent),
                 Nothing)
         End Get
+        Set(value As ILocation)
+            If value Is Nothing Then
+                EntityData.LocationId = Guid.Empty
+            Else
+                EntityData.LocationId = value.LocationId
+            End If
+        End Set
     End Property
 
     Protected Overrides ReadOnly Property EntityData As CharacterData
@@ -46,4 +53,33 @@ Friend Class Character
             Return Data.Characters(CharacterId)
         End Get
     End Property
+
+    Private ReadOnly DeltaX As IReadOnlyDictionary(Of String, Integer) =
+        New Dictionary(Of String, Integer) From
+        {
+            {Direction.North, 0},
+            {Direction.East, 1},
+            {Direction.South, 0},
+            {Direction.West, -1}
+        }
+    Private ReadOnly DeltaY As IReadOnlyDictionary(Of String, Integer) =
+        New Dictionary(Of String, Integer) From
+        {
+            {Direction.North, -1},
+            {Direction.East, 0},
+            {Direction.South, 1},
+            {Direction.West, 0}
+        }
+
+    Public Sub TryMove(directionName As String) Implements ICharacter.TryMove
+        Dim currentLocation = Me.Location
+        Dim nextColumn = currentLocation.Column + DeltaX(directionName)
+        Dim nextRow = currentLocation.Row + DeltaY(directionName)
+        Dim nextLocation = Map.GetLocation(nextColumn, nextRow)
+        If nextLocation IsNot Nothing Then
+            currentLocation.Character = Nothing
+            nextLocation.Character = Me
+            Me.Location = nextLocation
+        End If
+    End Sub
 End Class

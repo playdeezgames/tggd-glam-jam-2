@@ -1,4 +1,6 @@
-﻿Imports TGGD.UI
+﻿Imports System.ComponentModel
+Imports TGGD.UI
+Imports TGGDGJ2.Business
 
 Friend Class NavigationState
     Inherits BaseState
@@ -34,6 +36,20 @@ Friend Class NavigationState
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState
+        Select Case command
+            Case Up
+                world.Avatar.TryMove(Direction.North)
+                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+            Case Right
+                world.Avatar.TryMove(Direction.East)
+                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+            Case Down
+                world.Avatar.TryMove(Direction.South)
+                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+            Case Left
+                world.Avatar.TryMove(Direction.West)
+                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+        End Select
         Return Me
     End Function
 End Class
