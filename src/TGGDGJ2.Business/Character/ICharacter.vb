@@ -5,4 +5,5 @@
     ReadOnly Property Hue As Integer
     Property Location As ILocation
     Sub TryMove(directionName As String)
+    Function CanEnter(location As ILocation) As Boolean
 End Interface

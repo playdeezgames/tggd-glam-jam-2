@@ -76,10 +76,14 @@ Friend Class Character
         Dim nextColumn = currentLocation.Column + DeltaX(directionName)
         Dim nextRow = currentLocation.Row + DeltaY(directionName)
         Dim nextLocation = Map.GetLocation(nextColumn, nextRow)
-        If nextLocation IsNot Nothing Then
+        If nextLocation IsNot Nothing AndAlso CanEnter(nextLocation) Then
             currentLocation.Character = Nothing
             nextLocation.Character = Me
             Me.Location = nextLocation
         End If
     End Sub
+
+    Public Function CanEnter(location As ILocation) As Boolean Implements ICharacter.CanEnter
+        Return EntityType.CanEnter(Me, location)
+    End Function
 End Class

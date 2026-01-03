@@ -22,7 +22,7 @@ Friend Class TitleState
         buffer.WriteCenteredText(10, "D,Right Arrow: Right", 0)
         buffer.WriteCenteredText(11, "Space: Action", 0)
         buffer.WriteCenteredText(12, "Backspace: Cancel", 0)
-        buffer.WriteCenteredText(buffer.Rows - 1, "Press <Action>", 0)
+        buffer.WriteCenteredText(buffer.Rows - 1, "Press <SPACE>", 0)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState
