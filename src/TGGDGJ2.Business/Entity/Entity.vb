@@ -14,6 +14,7 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     Public Overridable Sub Clear() Implements IEntity.Clear
         With EntityData
             .EntityCounters.Clear()
+            .EntityYokes.Clear()
         End With
     End Sub
 

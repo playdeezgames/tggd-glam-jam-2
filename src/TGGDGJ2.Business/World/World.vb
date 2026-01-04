@@ -14,6 +14,7 @@ Public Class World
             .Counters.Clear()
             .Locations.Clear()
             .Maps.Clear()
+            .Messages.Clear()
         End With
     End Sub
 
@@ -72,11 +73,25 @@ Public Class World
         Return characterTypes(characterTypeName)
     End Function
 
+    Public Function GetTriggerType(triggerTypeName As String) As ITriggerType Implements IWorld.GetTriggerType
+        Return triggerTypes(triggerTypeName)
+    End Function
+
+    Public Sub AddMessage(ParamArray lines() As String) Implements IWorld.AddMessage
+        EntityData.Messages.Add(lines)
+    End Sub
+
     Private Shared ReadOnly mapTypes As IReadOnlyDictionary(Of String, IMapType) =
         New List(Of IMapType) From
         {
             StartingAreaMapType.Instance
         }.ToDictionary(Function(x) x.MapTypeName, Function(x) x)
+
+    Private Shared ReadOnly triggerTypes As IReadOnlyDictionary(Of String, ITriggerType) =
+        New List(Of ITriggerType) From
+        {
+            MessageTriggerType.Instance
+        }.ToDictionary(Function(x) x.TriggerTypeName, Function(x) x)
 
     Private Shared ReadOnly locationTypes As IReadOnlyDictionary(Of String, ILocationType) =
         New List(Of ILocationType) From

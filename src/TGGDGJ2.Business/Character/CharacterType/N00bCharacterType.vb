@@ -26,4 +26,18 @@
             character.GetCounter(Counters.Health).Value -= 1
         End If
     End Sub
+
+    Public Overrides Sub Bump(character As ICharacter, location As ILocation)
+        MyBase.Bump(character, location)
+        Dim trigger = location.BumpTrigger
+        If trigger IsNot Nothing Then
+            trigger.Fire(
+                character:=character,
+                location:=location)
+        End If
+    End Sub
+
+    Public Overrides Sub AddMessage(character As ICharacter, ParamArray lines() As String)
+        character.World.AddMessage(lines)
+    End Sub
 End Class

@@ -44,8 +44,15 @@
     Private Shared ReadOnly postProcessing As IReadOnlyDictionary(Of Char, Action(Of ILocation)) =
         New Dictionary(Of Char, Action(Of ILocation)) From
         {
-            {"@"c, AddressOf SetAvatarCharacter}
+            {"@"c, AddressOf SetAvatarCharacter},
+            {"!"c, AddressOf CreateSign}
         }
+
+    Private Shared Sub CreateSign(location As ILocation)
+        Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
+        trigger.SetMessage("Example sign!", "They have multiple lines, too!")
+        location.BumpTrigger = trigger
+    End Sub
 
     Private Shared Sub SetAvatarCharacter(location As ILocation)
         location.World.Avatar = location.Character

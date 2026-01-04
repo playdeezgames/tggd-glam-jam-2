@@ -51,6 +51,23 @@ Friend Class Location
         End Get
     End Property
 
+    Public Property BumpTrigger As ITrigger Implements ILocation.BumpTrigger
+        Get
+            Dim triggerId As Guid = Guid.Empty
+            If EntityData.EntityYokes.TryGetValue(Yokes.BumpTrigger, triggerId) Then
+                Return New Trigger(Data, triggerId, DoEvent)
+            End If
+            Return Nothing
+        End Get
+        Set(value As ITrigger)
+            If value Is Nothing Then
+                EntityData.EntityYokes.Remove(Yokes.BumpTrigger)
+            Else
+                EntityData.EntityYokes(Yokes.BumpTrigger) = value.TriggerId
+            End If
+        End Set
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As LocationData
         Get
             Return Data.Locations(LocationId)
@@ -68,6 +85,18 @@ Friend Class Location
         EntityData.CharacterId = characterId
         Dim result As ICharacter = New Character(Data, characterId, DoEvent)
         characterType.Initialize(result)
+        Return result
+    End Function
+
+    Public Function CreateTrigger(triggerType As ITriggerType) As ITrigger Implements ILocation.CreateTrigger
+        Dim triggerId = Guid.NewGuid
+        Dim triggerData = New TriggerData With
+            {
+                .EntityTypeName = triggerType.TriggerTypeName
+            }
+        Data.Triggers(triggerId) = triggerData
+        Dim result As ITrigger = New Trigger(Data, triggerId, DoEvent)
+        triggerType.Initialize(result)
         Return result
     End Function
 End Class

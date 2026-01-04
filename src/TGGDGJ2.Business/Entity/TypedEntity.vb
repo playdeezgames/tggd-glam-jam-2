@@ -3,6 +3,10 @@
 Public MustInherit Class TypedEntity(Of TEntityData As TypedEntityData, TEntityType)
     Inherits Entity(Of TEntityData)
     Implements ITypedEntity(Of TEntityType)
+    Public Overrides Sub Clear()
+        MyBase.Clear()
+        EntityData.EntityTypeName = Nothing
+    End Sub
     Protected Sub New(data As WorldData, doEvent As Action(Of String()))
         MyBase.New(data, doEvent)
     End Sub

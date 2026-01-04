@@ -111,4 +111,8 @@ Friend Class Character
     Public Sub Bump(location As ILocation) Implements ICharacter.Bump
         EntityType.Bump(Me, location)
     End Sub
+
+    Public Sub AddMessage(ParamArray lines() As String) Implements ICharacter.AddMessage
+        EntityType.AddMessage(Me, lines)
+    End Sub
 End Class
