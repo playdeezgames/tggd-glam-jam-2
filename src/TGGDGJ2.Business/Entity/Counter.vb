@@ -19,10 +19,13 @@ Friend Class Counter
 
     Public ReadOnly Property CounterId As Guid Implements ICounter.CounterId
 
-    Public ReadOnly Property Value As Integer Implements ICounter.Value
+    Public Property Value As Integer Implements ICounter.Value
         Get
             Return Math.Clamp(CounterData.Value, Minimum, Maximum)
         End Get
+        Set(value As Integer)
+            CounterData.Value = Math.Clamp(value, Minimum, Maximum)
+        End Set
     End Property
 
     Public ReadOnly Property Maximum As Integer Implements ICounter.Maximum

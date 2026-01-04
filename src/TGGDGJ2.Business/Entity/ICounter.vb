@@ -1,6 +1,6 @@
 ﻿Public Interface ICounter
     ReadOnly Property CounterId As Guid
-    ReadOnly Property Value As Integer
+    Property Value As Integer
     ReadOnly Property Maximum As Integer
     ReadOnly Property Minimum As Integer
 End Interface

@@ -12,7 +12,7 @@ Friend Class NavigationState
     Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String()))
         MyBase.New(buffer, world, doEvent)
         frame.Box(0, 0, buffer.Columns, buffer.Rows, True)
-        frame.Box(0, 0, 34, buffer.Rows, True)
+        frame.Box(0, 0, STATUS_OFFSET_COLUMN, buffer.Rows, True)
     End Sub
 
     Public Overrides Sub Refresh()
