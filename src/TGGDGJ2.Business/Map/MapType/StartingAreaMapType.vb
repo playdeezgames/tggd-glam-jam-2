@@ -11,7 +11,7 @@
             "#                              #",
             "#                              #",
             "#                              #",
-            "#                              #",
+            "#                   !          #",
             "#                              #",
             "#                              #",
             "#                              #",
@@ -31,7 +31,8 @@
             {" "c, FloorLocationType.Instance},
             {"@"c, FloorLocationType.Instance},
             {"#"c, WallLocationType.Instance},
-            {"+"c, LockedDoorLocationType.Instance}
+            {"+"c, LockedDoorLocationType.Instance},
+            {"!"c, SignLocationType.Instance}
         }
 
     Private Shared ReadOnly characterTypeTable As IReadOnlyDictionary(Of Char, ICharacterType) =
