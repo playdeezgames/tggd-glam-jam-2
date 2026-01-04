@@ -8,4 +8,7 @@ Public Interface IWorld
     Function GetCharacterType(characterTypeName As String) As ICharacterType
     Function GetTriggerType(triggerTypeName As String) As ITriggerType
     Sub AddMessage(ParamArray lines As String())
+    ReadOnly Property HasMessage As Boolean
+    Function GetMessage() As String()
+    Sub DismissMessage()
 End Interface

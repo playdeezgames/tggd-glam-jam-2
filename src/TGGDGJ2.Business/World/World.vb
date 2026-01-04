@@ -41,6 +41,12 @@ Public Class World
         End Get
     End Property
 
+    Public ReadOnly Property HasMessage As Boolean Implements IWorld.HasMessage
+        Get
+            Return EntityData.Messages.Any
+        End Get
+    End Property
+
     Public Sub Initialize() Implements IWorld.Initialize
         Clear()
         Dim startingMap = CreateMap(StartingAreaMapType.Instance)
@@ -79,6 +85,14 @@ Public Class World
 
     Public Sub AddMessage(ParamArray lines() As String) Implements IWorld.AddMessage
         EntityData.Messages.Add(lines)
+    End Sub
+
+    Public Function GetMessage() As String() Implements IWorld.GetMessage
+        Return EntityData.Messages.FirstOrDefault
+    End Function
+
+    Public Sub DismissMessage() Implements IWorld.DismissMessage
+        EntityData.Messages.RemoveAt(0)
     End Sub
 
     Private Shared ReadOnly mapTypes As IReadOnlyDictionary(Of String, IMapType) =
