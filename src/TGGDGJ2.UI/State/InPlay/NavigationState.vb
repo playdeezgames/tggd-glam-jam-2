@@ -42,20 +42,22 @@ Friend Class NavigationState
         buffer.WriteText((STATUS_OFFSET_COLUMN, OFFSET_ROW + 3), $"{satiety.Value}/{satiety.Maximum}", 0)
     End Sub
 
+    Private Function TryMove(directionName As String) As IUIState
+        world.Avatar.TryMove(directionName)
+        Return InPlayState.DetermineNextState(buffer, world, doEvent)
+    End Function
+
+
     Public Overrides Function HandleCommand(command As String) As IUIState
         Select Case command
             Case Up
-                world.Avatar.TryMove(Direction.North)
-                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+                Return TryMove(Direction.North)
             Case Right
-                world.Avatar.TryMove(Direction.East)
-                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+                Return TryMove(Direction.East)
             Case Down
-                world.Avatar.TryMove(Direction.South)
-                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+                Return TryMove(Direction.South)
             Case Left
-                world.Avatar.TryMove(Direction.West)
-                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+                Return TryMove(Direction.West)
         End Select
         Return Me
     End Function
