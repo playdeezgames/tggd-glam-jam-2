@@ -54,6 +54,13 @@ Friend Class Character
         End Get
     End Property
 
+    Public ReadOnly Property IsDead As Boolean Implements ICharacter.IsDead
+        Get
+            Dim health = GetCounter(Counters.Health)
+            Return health IsNot Nothing AndAlso health.Value = health.Minimum
+        End Get
+    End Property
+
     Private ReadOnly DeltaX As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {

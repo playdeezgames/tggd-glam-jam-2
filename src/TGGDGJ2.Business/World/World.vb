@@ -6,6 +6,16 @@ Public Class World
     Sub New(data As WorldData, doEvent As Action(Of String()))
         MyBase.New(data, doEvent)
     End Sub
+    Public Overrides Sub Clear()
+        MyBase.Clear()
+        With EntityData
+            .AvatarCharacterId = Guid.Empty
+            .Characters.Clear()
+            .Counters.Clear()
+            .Locations.Clear()
+            .Maps.Clear()
+        End With
+    End Sub
 
     Public Property Avatar As ICharacter Implements IWorld.Avatar
         Get

@@ -9,4 +9,5 @@
     Sub Enter(location As ILocation)
     Sub Leave(location As ILocation)
     Sub Bump(location As ILocation)
+    ReadOnly Property IsDead As Boolean
 End Interface

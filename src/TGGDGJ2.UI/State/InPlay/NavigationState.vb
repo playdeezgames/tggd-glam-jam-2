@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports TGGD.UI
+﻿Imports TGGD.UI
 Imports TGGDGJ2.Business
 
 Friend Class NavigationState

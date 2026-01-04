@@ -12,7 +12,9 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     Protected MustOverride ReadOnly Property EntityData As TEntityData
 
     Public Overridable Sub Clear() Implements IEntity.Clear
-        'TODO: clear
+        With EntityData
+            .EntityCounters.Clear()
+        End With
     End Sub
 
     Public Function CreateCounter(counterName As String, initialValue As Integer, minimumValue As Integer, maximumValue As Integer) As ICounter Implements IEntity.CreateCounter

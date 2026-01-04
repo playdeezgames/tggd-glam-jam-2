@@ -6,6 +6,9 @@ Friend Module InPlayState
                                       buffer As IUIBuffer(Of Integer),
                                       world As IWorld,
                                       doEvent As Action(Of String())) As IUIState
+        If world.Avatar.IsDead Then
+            Return New DeadState(buffer, world, doEvent)
+        End If
         Return New NavigationState(buffer, world, doEvent)
     End Function
 End Module
