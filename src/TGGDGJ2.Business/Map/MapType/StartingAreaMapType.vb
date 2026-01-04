@@ -14,7 +14,11 @@ Friend Class StartingAreaMapType
         Next
         For Each row In Enumerable.Range(1, map.Rows - 2)
             map.CreateLocation(0, row, WallLocationType.Instance)
-            map.CreateLocation(map.Columns - 1, row, WallLocationType.Instance)
+            If row = map.Rows \ 2 Then
+                map.CreateLocation(map.Columns - 1, row, LockedDoorLocationType.Instance)
+            Else
+                map.CreateLocation(map.Columns - 1, row, WallLocationType.Instance)
+            End If
         Next
         For Each column In Enumerable.Range(1, map.Columns - 2)
             For Each row In Enumerable.Range(1, map.Rows - 2)

@@ -72,7 +72,8 @@ Public Class World
         New List(Of ILocationType) From
         {
             FloorLocationType.Instance,
-            WallLocationType.Instance
+            WallLocationType.Instance,
+            LockedDoorLocationType.Instance
         }.ToDictionary(Function(x) x.LocationTypeName, Function(x) x)
 
     Private Shared ReadOnly characterTypes As IReadOnlyDictionary(Of String, ICharacterType) =
