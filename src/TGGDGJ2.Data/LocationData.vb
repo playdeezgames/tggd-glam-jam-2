@@ -1,5 +1,5 @@
 ﻿Public Class LocationData
-    Inherits TypedEntityData
+    Inherits InventoryEntityData
     Property MapId As Guid
     Property Column As Integer
     Property Row As Integer

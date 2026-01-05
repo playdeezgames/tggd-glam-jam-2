@@ -5,4 +5,5 @@
     Friend Const OPEN_DOOR = 131
     Friend Const SIGN = 132
     Friend Const N00B = 160
+    Friend Const KEY = 192
 End Module

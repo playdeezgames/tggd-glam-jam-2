@@ -83,6 +83,10 @@ Public Class World
         Return triggerTypes(triggerTypeName)
     End Function
 
+    Public Function GetItemType(itemTypeName As String) As IItemType Implements IWorld.GetItemType
+        Return itemTypes(itemTypeName)
+    End Function
+
     Public Sub AddMessage(title As String, ParamArray lines() As String) Implements IWorld.AddMessage
         EntityData.Messages.Add(New MessageData With {.Title = title, .Lines = lines})
     End Sub
@@ -100,6 +104,12 @@ Public Class World
         {
             StartingAreaMapType.Instance
         }.ToDictionary(Function(x) x.MapTypeName, Function(x) x)
+
+    Private Shared ReadOnly itemTypes As IReadOnlyDictionary(Of String, IItemType) =
+        New List(Of IItemType) From
+        {
+            KeyItemType.Instance
+        }.ToDictionary(Function(x) x.ItemTypeName, Function(x) x)
 
     Private Shared ReadOnly triggerTypes As IReadOnlyDictionary(Of String, ITriggerType) =
         New List(Of ITriggerType) From

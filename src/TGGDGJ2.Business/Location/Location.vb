@@ -1,7 +1,7 @@
 ﻿Imports TGGDGJ2.Data
 
 Friend Class Location
-    Inherits TypedEntity(Of LocationData, ILocationType)
+    Inherits InventoryEntity(Of LocationData, ILocationType)
     Implements ILocation
 
 

@@ -1,5 +1,5 @@
 ﻿Public Interface ILocation
-    Inherits ITypedEntity(Of ILocationType)
+    Inherits IInventoryEntity(Of ILocationType)
     ReadOnly Property LocationId As Guid
     Function CreateCharacter(characterType As ICharacterType) As ICharacter
     Property Character As ICharacter

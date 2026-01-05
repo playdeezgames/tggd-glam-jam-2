@@ -28,7 +28,12 @@ Friend Class NavigationState
                 If character IsNot Nothing Then
                     hue = character.Hue
                 Else
-                    hue = location.Hue
+                    Dim item = location.Items.FirstOrDefault
+                    If item IsNot Nothing Then
+                        hue = item.Hue
+                    Else
+                        hue = location.Hue
+                    End If
                 End If
                 buffer.SetPixel(plotX, plotY, hue)
             Next

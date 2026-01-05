@@ -7,4 +7,5 @@ Public Class WorldData
     Public Property Counters As New Dictionary(Of Guid, CounterData)
     Public Property Triggers As New Dictionary(Of Guid, TriggerData)
     Public Property Messages As New List(Of MessageData)
+    Public Property Items As New Dictionary(Of Guid, ItemData)
 End Class
