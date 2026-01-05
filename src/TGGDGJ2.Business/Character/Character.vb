@@ -1,7 +1,7 @@
 ﻿Imports TGGDGJ2.Data
 
 Friend Class Character
-    Inherits TypedEntity(Of CharacterData, ICharacterType)
+    Inherits InventoryEntity(Of CharacterData, ICharacterType)
     Implements ICharacter
 
     Public Sub New(

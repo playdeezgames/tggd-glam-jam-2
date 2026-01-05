@@ -1,5 +1,5 @@
 ﻿Public Interface ICharacter
-    Inherits ITypedEntity(Of ICharacterType)
+    Inherits IInventoryEntity(Of ICharacterType)
     ReadOnly Property CharacterId As Guid
     ReadOnly Property Map As IMap
     ReadOnly Property Hue As Integer

@@ -17,6 +17,14 @@
         Return Hue.N00B
     End Function
 
+    Public Overrides Sub Enter(character As ICharacter, location As ILocation)
+        MyBase.Enter(character, location)
+        For Each item In location.Items
+            location.RemoveItem(item)
+            character.AddItem(item)
+        Next
+    End Sub
+
     Public Overrides Sub Leave(character As ICharacter, location As ILocation)
         MyBase.Leave(character, location)
         Dim satiety = character.GetCounter(Counters.Satiety)

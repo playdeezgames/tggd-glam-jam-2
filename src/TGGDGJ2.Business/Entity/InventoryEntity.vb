@@ -14,6 +14,14 @@ Friend MustInherit Class InventoryEntity(Of TEntityData As InventoryEntityData, 
         End Get
     End Property
 
+    Public Sub AddItem(item As IItem) Implements IInventoryEntity(Of TEntityType).AddItem
+        EntityData.ItemIds.Add(item.ItemId)
+    End Sub
+
+    Public Sub RemoveItem(item As IItem) Implements IInventoryEntity(Of TEntityType).RemoveItem
+        EntityData.ItemIds.Remove(item.ItemId)
+    End Sub
+
     Public Function CreateItem(itemType As IItemType) As IItem Implements IInventoryEntity(Of TEntityType).CreateItem
         Dim itemId = Guid.NewGuid
         Dim itemData = New ItemData With
@@ -21,9 +29,9 @@ Friend MustInherit Class InventoryEntity(Of TEntityData As InventoryEntityData, 
                 .EntityTypeName = itemType.ItemTypeName
             }
         Data.Items(itemId) = itemData
-        EntityData.ItemIds.Add(itemId)
         Dim result As IItem = New Item(Data, itemId, DoEvent)
         itemType.Initialize(result)
+        AddItem(result)
         Return result
     End Function
 End Class
