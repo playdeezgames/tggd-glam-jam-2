@@ -32,7 +32,7 @@
             {"@"c, FloorLocationType.Instance},
             {"k"c, FloorLocationType.Instance},
             {"#"c, WallLocationType.Instance},
-            {"+"c, LockedDoorLocationType.Instance},
+            {"+"c, UnlockedDoorLocationType.Instance},
             {"!"c, SignLocationType.Instance}
         }
 
@@ -57,8 +57,12 @@
         }
 
     Private Shared Sub CreateDoor(location As ILocation)
+        location.BumpTrigger = location.CreateTrigger(MessageTriggerType.Instance)
+        location.BumpTrigger.SetMessage("TODO: Go Thru Door", "Yes, you unlocked the door. Good job.")
+        Dim newLocation = location.Map.CreateLocation(location.Column, location.Row, LockedDoorLocationType.Instance)
         Dim trigger = location.CreateTrigger(UnlockTriggerType.Instance)
-        location.BumpTrigger = trigger
+        trigger.NextLocation = location
+        newLocation.BumpTrigger = trigger
     End Sub
 
     Private Shared Sub CreateSign(location As ILocation)

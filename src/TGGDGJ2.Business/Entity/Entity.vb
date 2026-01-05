@@ -39,9 +39,15 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         Return Nothing
     End Function
 
+    Public Overridable Sub Destroy() Implements IEntity.Destroy
+        Clear()
+    End Sub
+
     Public ReadOnly Property World As IWorld Implements IEntity.World
         Get
             Return New World(Data, DoEvent)
         End Get
     End Property
+
+
 End Class

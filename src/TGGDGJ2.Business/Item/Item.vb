@@ -28,4 +28,9 @@ Public Class Item
             Return Data.Items(ItemId)
         End Get
     End Property
+
+    Public Overrides Sub Destroy()
+        MyBase.Destroy()
+        Data.Items.Remove(ItemId)
+    End Sub
 End Class

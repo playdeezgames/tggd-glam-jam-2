@@ -7,4 +7,5 @@
                           minimumValue As Integer,
                           maximumValue As Integer) As ICounter
     Function GetCounter(counterName As String) As ICounter
+    Sub Destroy()
 End Interface

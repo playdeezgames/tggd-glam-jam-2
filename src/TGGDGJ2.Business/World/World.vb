@@ -124,7 +124,8 @@ Public Class World
             FloorLocationType.Instance,
             WallLocationType.Instance,
             LockedDoorLocationType.Instance,
-            SignLocationType.Instance
+            SignLocationType.Instance,
+            UnlockedDoorLocationType.Instance
         }.ToDictionary(Function(x) x.LocationTypeName, Function(x) x)
 
     Private Shared ReadOnly characterTypes As IReadOnlyDictionary(Of String, ICharacterType) =

@@ -17,5 +17,10 @@
             character.AddMessage("Door is Locked!", "You need a key!")
             Return
         End If
+        location.Map.SetLocation(location.Column, location.Row, trigger.NextLocation)
+        character.RemoveItem(key)
+        key.Destroy()
+        trigger.Destroy()
+        location.Destroy()
     End Sub
 End Class

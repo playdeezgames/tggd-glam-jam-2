@@ -99,4 +99,9 @@ Friend Class Location
         triggerType.Initialize(result)
         Return result
     End Function
+
+    Public Overrides Sub Destroy()
+        MyBase.Destroy()
+        Data.Locations.Remove(LocationId)
+    End Sub
 End Class

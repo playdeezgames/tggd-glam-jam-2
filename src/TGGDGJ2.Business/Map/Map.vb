@@ -35,6 +35,10 @@ Friend Class Map
         End Get
     End Property
 
+    Public Sub SetLocation(column As Integer, row As Integer, location As ILocation) Implements IMap.SetLocation
+        EntityData.LocationIds(column + row * Columns) = If(location IsNot Nothing, location.LocationId, Guid.Empty)
+    End Sub
+
     Public Function CreateLocation(column As Integer, row As Integer, locationType As ILocationType) As ILocation Implements IMap.CreateLocation
         Dim locationId = Guid.NewGuid
         Dim locationData As New LocationData With

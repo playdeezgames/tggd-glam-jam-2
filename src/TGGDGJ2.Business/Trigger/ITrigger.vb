@@ -5,4 +5,5 @@
     Sub SetMessage(title As String, ParamArray lines As String())
     Function GetMessage() As String()
     Property Title As String
+    Property NextLocation As ILocation
 End Interface

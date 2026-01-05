@@ -26,6 +26,23 @@ Public Class Trigger
         End Set
     End Property
 
+    Public Property NextLocation As ILocation Implements ITrigger.NextLocation
+        Get
+            Dim locationId As Guid = Guid.Empty
+            If EntityData.EntityYokes.TryGetValue(Yokes.NextLocation, locationId) Then
+                Return New Location(Data, locationId, DoEvent)
+            End If
+            Return Nothing
+        End Get
+        Set(value As ILocation)
+            If value Is Nothing Then
+                EntityData.EntityYokes.Remove(Yokes.NextLocation)
+            Else
+                EntityData.EntityYokes(Yokes.NextLocation) = value.LocationId
+            End If
+        End Set
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As TriggerData
         Get
             Return Data.Triggers(TriggerId)
@@ -44,4 +61,9 @@ Public Class Trigger
     Public Function GetMessage() As String() Implements ITrigger.GetMessage
         Return EntityData.Lines
     End Function
+
+    Public Overrides Sub Destroy()
+        MyBase.Destroy()
+        Data.Triggers.Remove(TriggerId)
+    End Sub
 End Class
