@@ -114,7 +114,8 @@ Public Class World
     Private Shared ReadOnly triggerTypes As IReadOnlyDictionary(Of String, ITriggerType) =
         New List(Of ITriggerType) From
         {
-            MessageTriggerType.Instance
+            MessageTriggerType.Instance,
+            UnlockTriggerType.Instance
         }.ToDictionary(Function(x) x.TriggerTypeName, Function(x) x)
 
     Private Shared ReadOnly locationTypes As IReadOnlyDictionary(Of String, ILocationType) =

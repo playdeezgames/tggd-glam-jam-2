@@ -57,8 +57,7 @@
         }
 
     Private Shared Sub CreateDoor(location As ILocation)
-        Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
-        trigger.SetMessage("The Door is Locked!", "You need a key!")
+        Dim trigger = location.CreateTrigger(UnlockTriggerType.Instance)
         location.BumpTrigger = trigger
     End Sub
 
