@@ -6,5 +6,5 @@ Public Class WorldData
     Public Property AvatarCharacterId As Guid
     Public Property Counters As New Dictionary(Of Guid, CounterData)
     Public Property Triggers As New Dictionary(Of Guid, TriggerData)
-    Public Property Messages As New List(Of String())
+    Public Property Messages As New List(Of MessageData)
 End Class

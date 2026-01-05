@@ -45,8 +45,15 @@
         New Dictionary(Of Char, Action(Of ILocation)) From
         {
             {"@"c, AddressOf SetAvatarCharacter},
-            {"!"c, AddressOf CreateSign}
+            {"!"c, AddressOf CreateSign},
+            {"+"c, AddressOf CreateDoor}
         }
+
+    Private Shared Sub CreateDoor(location As ILocation)
+        Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
+        trigger.SetMessage("The Door is Locked!", "You need a key!")
+        location.BumpTrigger = trigger
+    End Sub
 
     Private Shared Sub CreateSign(location As ILocation)
         Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)

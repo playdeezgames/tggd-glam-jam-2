@@ -7,8 +7,8 @@ Public Interface IWorld
     Function GetLocationType(locationTypeName As String) As ILocationType
     Function GetCharacterType(characterTypeName As String) As ICharacterType
     Function GetTriggerType(triggerTypeName As String) As ITriggerType
-    Sub AddMessage(ParamArray lines As String())
+    Sub AddMessage(title As String, ParamArray lines As String())
     ReadOnly Property HasMessage As Boolean
-    Function GetMessage() As String()
+    Function GetMessage() As IMessage
     Sub DismissMessage()
 End Interface

@@ -6,15 +6,19 @@ Friend Class MessageState
 
     Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String()))
         MyBase.New(buffer, world, doEvent)
+        frame.Box(0, 0, buffer.Columns, 3, True)
     End Sub
 
     Public Overrides Sub Refresh()
         buffer.Fill(32)
-        Dim position = (0, 0)
         Dim message = world.GetMessage()
-        For Each line In message
+        buffer.WriteCenteredText(1, message.Title, 0)
+        Dim position = (0, 3)
+        For Each line In message.Lines
             position = buffer.WriteLine(position, line, 0)
         Next
+        buffer.DrawFrame((0, 0), frame)
+        buffer.WriteCenteredText(buffer.Rows - 1, "<SPACE> to Continue...", 0)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

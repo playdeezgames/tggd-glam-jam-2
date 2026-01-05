@@ -10,5 +10,5 @@
     Sub Leave(location As ILocation)
     Sub Bump(location As ILocation)
     ReadOnly Property IsDead As Boolean
-    Sub AddMessage(ParamArray lines As String())
+    Sub AddMessage(title As String, ParamArray lines As String())
 End Interface

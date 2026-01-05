@@ -17,6 +17,15 @@ Public Class Trigger
 
     Public ReadOnly Property TriggerId As Guid Implements ITrigger.TriggerId
 
+    Public Property Title As String Implements ITrigger.Title
+        Get
+            Return EntityData.Title
+        End Get
+        Set(value As String)
+            EntityData.Title = value
+        End Set
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As TriggerData
         Get
             Return Data.Triggers(TriggerId)
@@ -27,7 +36,8 @@ Public Class Trigger
         EntityType.Fire(Me, character, location)
     End Sub
 
-    Public Sub SetMessage(ParamArray lines() As String) Implements ITrigger.SetMessage
+    Public Sub SetMessage(title As String, ParamArray lines() As String) Implements ITrigger.SetMessage
+        EntityData.Title = title
         EntityData.Lines = lines
     End Sub
 

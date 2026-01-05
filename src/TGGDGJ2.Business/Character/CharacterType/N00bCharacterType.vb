@@ -37,7 +37,7 @@
         End If
     End Sub
 
-    Public Overrides Sub AddMessage(character As ICharacter, ParamArray lines() As String)
-        character.World.AddMessage(lines)
+    Public Overrides Sub AddMessage(character As ICharacter, title As String, ParamArray lines() As String)
+        character.World.AddMessage(title, lines)
     End Sub
 End Class

@@ -112,7 +112,7 @@ Friend Class Character
         EntityType.Bump(Me, location)
     End Sub
 
-    Public Sub AddMessage(ParamArray lines() As String) Implements ICharacter.AddMessage
-        EntityType.AddMessage(Me, lines)
+    Public Sub AddMessage(title As String, ParamArray lines() As String) Implements ICharacter.AddMessage
+        EntityType.AddMessage(Me, title, lines)
     End Sub
 End Class

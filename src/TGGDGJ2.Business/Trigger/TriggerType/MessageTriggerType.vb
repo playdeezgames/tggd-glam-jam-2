@@ -12,6 +12,6 @@
     End Sub
 
     Public Overrides Sub Fire(trigger As ITrigger, character As ICharacter, location As ILocation)
-        character.AddMessage(trigger.GetMessage())
+        character.AddMessage(trigger.Title, trigger.GetMessage())
     End Sub
 End Class

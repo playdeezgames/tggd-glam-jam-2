@@ -83,17 +83,17 @@ Public Class World
         Return triggerTypes(triggerTypeName)
     End Function
 
-    Public Sub AddMessage(ParamArray lines() As String) Implements IWorld.AddMessage
-        EntityData.Messages.Add(lines)
+    Public Sub AddMessage(title As String, ParamArray lines() As String) Implements IWorld.AddMessage
+        EntityData.Messages.Add(New MessageData With {.Title = title, .Lines = lines})
     End Sub
-
-    Public Function GetMessage() As String() Implements IWorld.GetMessage
-        Return EntityData.Messages.FirstOrDefault
-    End Function
 
     Public Sub DismissMessage() Implements IWorld.DismissMessage
         EntityData.Messages.RemoveAt(0)
     End Sub
+
+    Public Function GetMessage() As IMessage Implements IWorld.GetMessage
+        Return New Message(EntityData.Messages.First.Title, EntityData.Messages.First.Lines)
+    End Function
 
     Private Shared ReadOnly mapTypes As IReadOnlyDictionary(Of String, IMapType) =
         New List(Of IMapType) From
