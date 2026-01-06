@@ -1,6 +1,4 @@
-﻿Imports System.Data.Common
-
-Public MustInherit Class MapType
+﻿Public MustInherit Class MapType
     Implements IMapType
 
     Protected Sub New(mapTypeName As String, grid As String())
@@ -16,16 +14,16 @@ Public MustInherit Class MapType
 
     Public ReadOnly Property MapTypeName As String Implements IMapType.MapTypeName
     Protected ReadOnly grid As String()
-    Public Overridable Sub Initialize(map As IMap) Implements IMapType.Initialize
+    Public Overridable Sub Initialize(map As IMap, context As Dictionary(Of String, Object)) Implements IMapType.Initialize
         For Each row In Enumerable.Range(0, Rows)
             For Each column In Enumerable.Range(0, Columns)
                 Dim gridCell = grid(row)(column)
-                CreateLocation(map, row, column, gridCell)
+                CreateLocation(map, row, column, gridCell, context)
             Next
         Next
     End Sub
 
-    Protected MustOverride Sub PostProcess(gridCell As Char, location As ILocation)
+    Protected MustOverride Sub PostProcess(gridCell As Char, location As ILocation, context As Dictionary(Of String, Object))
 
     Private Sub CreateItem(gridCell As Char, location As ILocation)
         Dim itemType As IItemType = GetItemType(gridCell)
@@ -45,12 +43,12 @@ Public MustInherit Class MapType
 
     Protected MustOverride Function GetCharacterType(gridCell As Char) As ICharacterType
 
-    Private Sub CreateLocation(map As IMap, row As Integer, column As Integer, gridCell As Char)
+    Private Sub CreateLocation(map As IMap, row As Integer, column As Integer, gridCell As Char, context As Dictionary(Of String, Object))
         Dim locationType As ILocationType = GetLocationType(gridCell)
         Dim location = map.CreateLocation(column, row, locationType)
         CreateCharacter(gridCell, location)
         CreateItem(gridCell, location)
-        PostProcess(gridCell, location)
+        PostProcess(gridCell, location, context)
     End Sub
 
     Protected MustOverride Function GetLocationType(gridCell As Char) As ILocationType

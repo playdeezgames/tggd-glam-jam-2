@@ -2,5 +2,5 @@
     ReadOnly Property MapTypeName As String
     ReadOnly Property Columns As Integer
     ReadOnly Property Rows As Integer
-    Sub Initialize(result As IMap)
+    Sub Initialize(result As IMap, context As Dictionary(Of String, Object))
 End Interface

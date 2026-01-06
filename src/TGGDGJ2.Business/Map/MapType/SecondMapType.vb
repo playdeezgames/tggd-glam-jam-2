@@ -26,10 +26,10 @@
             })
     End Sub
 
-    Public Overrides Sub Initialize(map As IMap)
+    Public Overrides Sub Initialize(map As IMap, context As Dictionary(Of String, Object))
     End Sub
 
-    Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation)
+    Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation, context As Dictionary(Of String, Object))
         'nada!
     End Sub
 

@@ -58,7 +58,7 @@
             FloorLocationType.Instance)))
     End Function
 
-    Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation)
+    Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation, context As Dictionary(Of String, Object))
         Select Case gridCell
             Case "@"c
                 SetAvatarCharacter(location)

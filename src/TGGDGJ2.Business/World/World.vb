@@ -49,11 +49,12 @@ Public Class World
 
     Public Sub Initialize() Implements IWorld.Initialize
         Clear()
-        Dim startingMap = CreateMap(StartingAreaMapType.Instance)
-        Dim secondMap = CreateMap(SecondMapType.Instance)
+        Dim context As New Dictionary(Of String, Object)
+        Dim startingMap = CreateMap(StartingAreaMapType.Instance, context)
+        Dim secondMap = CreateMap(SecondMapType.Instance, context)
     End Sub
 
-    Public Function CreateMap(mapType As IMapType) As IMap Implements IWorld.CreateMap
+    Public Function CreateMap(mapType As IMapType, context As Dictionary(Of String, Object)) As IMap Implements IWorld.CreateMap
         Dim mapId = Guid.NewGuid()
         Dim mapData As New MapData With
             {
@@ -64,7 +65,7 @@ Public Class World
             }
         Data.Maps(mapId) = mapData
         Dim result As New Map(Data, mapId, DoEvent)
-        mapType.Initialize(result)
+        mapType.Initialize(result, context)
         Return result
     End Function
 
