@@ -2,10 +2,10 @@
     Inherits MapType
 
     Private Sub New()
-        MyBase.New(Name, grid(0).Length, grid.Length)
+        MyBase.New(Name, legacyGrid(0).Length, legacyGrid.Length)
     End Sub
 
-    Private Shared ReadOnly grid As String() =
+    Private Shared ReadOnly legacyGrid As String() =
         {
             "################################",
             "#                              #",
@@ -76,9 +76,9 @@
     End Sub
 
     Public Overrides Sub Initialize(map As IMap)
-        For Each row In Enumerable.Range(0, grid.Length)
-            For Each column In Enumerable.Range(0, grid(row).Length)
-                Dim gridCell = grid(row)(column)
+        For Each row In Enumerable.Range(0, legacyGrid.Length)
+            For Each column In Enumerable.Range(0, legacyGrid(row).Length)
+                Dim gridCell = legacyGrid(row)(column)
                 Dim locationType = locationTypeTable(gridCell)
                 Dim location = map.CreateLocation(column, row, locationType)
                 Dim characterType As ICharacterType = Nothing

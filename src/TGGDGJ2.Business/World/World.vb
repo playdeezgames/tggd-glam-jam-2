@@ -50,6 +50,7 @@ Public Class World
     Public Sub Initialize() Implements IWorld.Initialize
         Clear()
         Dim startingMap = CreateMap(StartingAreaMapType.Instance)
+        Dim secondMap = CreateMap(SecondMapType.Instance)
     End Sub
 
     Public Function CreateMap(mapType As IMapType) As IMap Implements IWorld.CreateMap
@@ -102,7 +103,8 @@ Public Class World
     Private Shared ReadOnly mapTypes As IReadOnlyDictionary(Of String, IMapType) =
         New List(Of IMapType) From
         {
-            StartingAreaMapType.Instance
+            StartingAreaMapType.Instance,
+            SecondMapType.Instance
         }.ToDictionary(Function(x) x.MapTypeName, Function(x) x)
 
     Private Shared ReadOnly itemTypes As IReadOnlyDictionary(Of String, IItemType) =
