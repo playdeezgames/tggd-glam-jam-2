@@ -2,59 +2,27 @@
     Inherits MapType
 
     Private Sub New()
-        MyBase.New(Name, legacyGrid(0).Length, legacyGrid.Length)
+        MyBase.New(
+            Name,
+            {
+                "################################",
+                "#                              #",
+                "#                              #",
+                "#                              #",
+                "#                   !          #",
+                "#                              #",
+                "#                              #",
+                "#                              #",
+                "#              @               +",
+                "#                              #",
+                "#                              #",
+                "#                              #",
+                "#                              #",
+                "#   k                          #",
+                "#                              #",
+                "################################"
+            })
     End Sub
-
-    Private Shared ReadOnly legacyGrid As String() =
-        {
-            "################################",
-            "#                              #",
-            "#                              #",
-            "#                              #",
-            "#                   !          #",
-            "#                              #",
-            "#                              #",
-            "#                              #",
-            "#              @               +",
-            "#                              #",
-            "#                              #",
-            "#                              #",
-            "#                              #",
-            "#   k                          #",
-            "#                              #",
-            "################################"
-        }
-
-    Private Shared ReadOnly locationTypeTable As IReadOnlyDictionary(Of Char, ILocationType) =
-        New Dictionary(Of Char, ILocationType) From
-        {
-            {" "c, FloorLocationType.Instance},
-            {"@"c, FloorLocationType.Instance},
-            {"k"c, FloorLocationType.Instance},
-            {"#"c, WallLocationType.Instance},
-            {"+"c, UnlockedDoorLocationType.Instance},
-            {"!"c, SignLocationType.Instance}
-        }
-
-    Private Shared ReadOnly characterTypeTable As IReadOnlyDictionary(Of Char, ICharacterType) =
-        New Dictionary(Of Char, ICharacterType) From
-        {
-            {"@"c, N00bCharacterType.Instance}
-        }
-
-    Private Shared ReadOnly itemTypeTable As IReadOnlyDictionary(Of Char, IItemType) =
-        New Dictionary(Of Char, IItemType) From
-        {
-            {"k"c, KeyItemType.Instance}
-        }
-
-    Private Shared ReadOnly postProcessing As IReadOnlyDictionary(Of Char, Action(Of ILocation)) =
-        New Dictionary(Of Char, Action(Of ILocation)) From
-        {
-            {"@"c, AddressOf SetAvatarCharacter},
-            {"!"c, AddressOf CreateSign},
-            {"+"c, AddressOf CreateDoor}
-        }
 
     Private Shared Sub CreateDoor(location As ILocation)
         location.BumpTrigger = location.CreateTrigger(MessageTriggerType.Instance)
@@ -75,25 +43,30 @@
         location.World.Avatar = location.Character
     End Sub
 
-    Public Overrides Sub Initialize(map As IMap)
-        For Each row In Enumerable.Range(0, legacyGrid.Length)
-            For Each column In Enumerable.Range(0, legacyGrid(row).Length)
-                Dim gridCell = legacyGrid(row)(column)
-                Dim locationType = locationTypeTable(gridCell)
-                Dim location = map.CreateLocation(column, row, locationType)
-                Dim characterType As ICharacterType = Nothing
-                If characterTypeTable.TryGetValue(gridCell, characterType) Then
-                    location.CreateCharacter(characterType)
-                End If
-                Dim itemType As IItemType = Nothing
-                If itemTypeTable.TryGetValue(gridCell, itemType) Then
-                    location.CreateItem(itemType)
-                End If
-                Dim postProcessor As Action(Of ILocation) = Nothing
-                postProcessing.TryGetValue(gridCell, postProcessor)
-                postProcessor?.Invoke(location)
-            Next
-        Next
+    Protected Overrides Function GetItemType(gridCell As Char) As IItemType
+        Return If(gridCell = "k"c, KeyItemType.Instance, Nothing)
+    End Function
+
+    Protected Overrides Function GetCharacterType(gridCell As Char) As ICharacterType
+        Return If(gridCell = "@"c, N00bCharacterType.Instance, Nothing)
+    End Function
+
+    Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
+        Return If(gridCell = "#"c, WallLocationType.Instance,
+            If(gridCell = "+"c, UnlockedDoorLocationType.Instance,
+            If(gridCell = "!"c, SignLocationType.Instance,
+            FloorLocationType.Instance)))
+    End Function
+
+    Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation)
+        Select Case gridCell
+            Case "@"c
+                SetAvatarCharacter(location)
+            Case "!"c
+                CreateSign(location)
+            Case "+"c
+                CreateDoor(location)
+        End Select
     End Sub
 
     Friend Shared ReadOnly Name As String = NameOf(StartingAreaMapType)
