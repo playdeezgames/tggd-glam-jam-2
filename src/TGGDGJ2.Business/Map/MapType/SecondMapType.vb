@@ -15,7 +15,7 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "+                              #",
+                "+x                             #",
                 "#                              #",
                 "#                              #",
                 "#                              #",
@@ -26,11 +26,22 @@
             })
     End Sub
 
-    Public Overrides Sub Initialize(map As IMap, context As Dictionary(Of String, Object))
+    Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation, context As Dictionary(Of String, Object))
+        Select Case gridCell
+            Case "+"c
+                CreateDoor(location, context)
+            Case "x"c
+                CreateDestination(location, context)
+        End Select
     End Sub
 
-    Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation, context As Dictionary(Of String, Object))
-        'nada!
+    Private Sub CreateDestination(location As ILocation, context As Dictionary(Of String, Object))
+        CType(context(StartingAreaDoorExit), ILocation).BumpTrigger.Destination = location
+    End Sub
+
+    Private Sub CreateDoor(location As ILocation, context As Dictionary(Of String, Object))
+        location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
+        location.BumpTrigger.Destination = CType(context(StartingAreaDoorDestination), ILocation)
     End Sub
 
     Protected Overrides Function GetItemType(gridCell As Char) As IItemType

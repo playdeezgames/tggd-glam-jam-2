@@ -6,4 +6,5 @@
     Function GetMessage() As String()
     Property Title As String
     Property NextLocation As ILocation
+    Property Destination As ILocation
 End Interface

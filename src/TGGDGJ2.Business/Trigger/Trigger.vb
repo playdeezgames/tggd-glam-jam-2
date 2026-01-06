@@ -49,6 +49,23 @@ Public Class Trigger
         End Get
     End Property
 
+    Public Property Destination As ILocation Implements ITrigger.Destination
+        Get
+            Dim locationId As Guid = Guid.Empty
+            If EntityData.EntityYokes.TryGetValue(Yokes.Destination, locationId) Then
+                Return New Location(Data, locationId, DoEvent)
+            End If
+            Return Nothing
+        End Get
+        Set(value As ILocation)
+            If value Is Nothing Then
+                EntityData.EntityYokes.Remove(Yokes.Destination)
+            Else
+                EntityData.EntityYokes(Yokes.Destination) = value.LocationId
+            End If
+        End Set
+    End Property
+
     Public Sub Fire(Optional character As ICharacter = Nothing, Optional location As ILocation = Nothing) Implements ITrigger.Fire
         EntityType.Fire(Me, character, location)
     End Sub

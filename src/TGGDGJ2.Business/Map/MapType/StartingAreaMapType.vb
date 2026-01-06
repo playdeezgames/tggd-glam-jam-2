@@ -6,27 +6,26 @@
             Name,
             {
                 "################################",
-                "#                              #",
-                "#                              #",
-                "#                              #",
-                "#                   !          #",
-                "#                              #",
-                "#                              #",
-                "#                              #",
-                "#              @               +",
+                "#!                             #",
                 "#                              #",
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#   k                          #",
                 "#                              #",
+                "#                              #",
+                "#              @              x+",
+                "#                              #",
+                "#                              #",
+                "#                              #",
+                "#                              #",
+                "#                              #",
+                "#k                             #",
                 "################################"
             })
     End Sub
 
     Private Shared Sub CreateDoor(location As ILocation)
-        location.BumpTrigger = location.CreateTrigger(MessageTriggerType.Instance)
-        location.BumpTrigger.SetMessage("TODO: Go Thru Door", "Yes, you unlocked the door. Good job.")
+        location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
         Dim newLocation = location.Map.CreateLocation(location.Column, location.Row, LockedDoorLocationType.Instance)
         Dim trigger = location.CreateTrigger(UnlockTriggerType.Instance)
         trigger.NextLocation = location
@@ -35,7 +34,13 @@
 
     Private Shared Sub CreateSign(location As ILocation)
         Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
-        trigger.SetMessage("Example sign!", "They have multiple lines, too!")
+        trigger.SetMessage(
+            "This is a sign!",
+            "Who put it here?",
+            "Can I trust what it says?",
+            "Is it a good idea to go and read a sign that is",
+            "far away from the obvious target of the key,",
+            "when the game has a starvation mechanic?")
         location.BumpTrigger = trigger
     End Sub
 
@@ -65,7 +70,10 @@
             Case "!"c
                 CreateSign(location)
             Case "+"c
+                context(StartingAreaDoorExit) = location
                 CreateDoor(location)
+            Case "x"c
+                context(StartingAreaDoorDestination) = location
         End Select
     End Sub
 

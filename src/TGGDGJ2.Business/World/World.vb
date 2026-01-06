@@ -118,7 +118,8 @@ Public Class World
         New List(Of ITriggerType) From
         {
             MessageTriggerType.Instance,
-            UnlockTriggerType.Instance
+            UnlockTriggerType.Instance,
+            TeleportTriggerType.Instance
         }.ToDictionary(Function(x) x.TriggerTypeName, Function(x) x)
 
     Private Shared ReadOnly locationTypes As IReadOnlyDictionary(Of String, ILocationType) =
