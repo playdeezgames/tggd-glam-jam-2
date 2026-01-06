@@ -71,7 +71,7 @@ Friend Class NavigationState
             Case Left
                 Return TryMove(Direction.West)
             Case Green
-                Return New GameMenuState(buffer, world, doEvent)
+                Return New ActionMenuState(buffer, world, doEvent)
         End Select
         Return Me
     End Function

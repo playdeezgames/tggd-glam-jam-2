@@ -1,0 +1,30 @@
+﻿Imports TGGD.UI
+
+Friend Class ActionMenuState
+    Inherits BaseState
+    Implements IUIState
+    Private ReadOnly menu As Menu
+
+    Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String()))
+        MyBase.New(buffer, world, doEvent)
+        Dim menuChoices = GenerateChoices(buffer, world, doEvent)
+        Me.menu = New Menu((0, 0), menuChoices.ToArray, 0)
+    End Sub
+
+    Private Shared Function GenerateChoices(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String())) As IEnumerable(Of Choice)
+        Dim result As New List(Of Choice) From {
+            New Choice("Continue", Function() InPlayState.DetermineNextState(buffer, world, doEvent)),
+            New Choice("Game Menu", Function() InPlayState.DetermineNextState(buffer, world, doEvent))
+        }
+        Return result
+    End Function
+
+    Public Overrides Sub Refresh()
+        buffer.Fill(32)
+        menu.Render(buffer)
+    End Sub
+
+    Public Overrides Function HandleCommand(command As String) As IUIState
+        Return If(menu.HandleCommand(command), Me)
+    End Function
+End Class
