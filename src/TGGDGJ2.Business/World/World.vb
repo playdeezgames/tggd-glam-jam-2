@@ -111,7 +111,8 @@ Public Class World
     Private Shared ReadOnly itemTypes As IReadOnlyDictionary(Of String, IItemType) =
         New List(Of IItemType) From
         {
-            KeyItemType.Instance
+            KeyItemType.Instance,
+            FoodItemType.Instance
         }.ToDictionary(Function(x) x.ItemTypeName, Function(x) x)
 
     Private Shared ReadOnly triggerTypes As IReadOnlyDictionary(Of String, ITriggerType) =

@@ -21,7 +21,7 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#                              #",
+                "#                             f#",
                 "################################"
             })
     End Sub
@@ -45,7 +45,7 @@
     End Sub
 
     Protected Overrides Function GetItemType(gridCell As Char) As IItemType
-        Return Nothing
+        Return If(gridCell = "f"c, FoodItemType.Instance, Nothing)
     End Function
 
     Protected Overrides Function GetCharacterType(gridCell As Char) As ICharacterType
