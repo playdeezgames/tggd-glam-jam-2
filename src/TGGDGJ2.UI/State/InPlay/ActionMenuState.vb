@@ -13,9 +13,12 @@ Friend Class ActionMenuState
 
     Private Shared Function GenerateChoices(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String())) As IEnumerable(Of Choice)
         Dim result As New List(Of Choice) From {
-            New Choice("Continue", Function() InPlayState.DetermineNextState(buffer, world, doEvent)),
-            New Choice("Game Menu", Function() InPlayState.DetermineNextState(buffer, world, doEvent))
+            New Choice("Never Mind", Function() InPlayState.DetermineNextState(buffer, world, doEvent))
         }
+        If world.Avatar.HasItems Then
+            result.Add(New Choice("Inventory", Function() New InventoryMenuState(buffer, world, doEvent)))
+        End If
+        result.Add(New Choice("Game Menu", Function() New GameMenuState(buffer, world, doEvent)))
         Return result
     End Function
 

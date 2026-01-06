@@ -14,6 +14,12 @@ Friend MustInherit Class InventoryEntity(Of TEntityData As InventoryEntityData, 
         End Get
     End Property
 
+    Public ReadOnly Property HasItems As Boolean Implements IInventoryEntity(Of TEntityType).HasItems
+        Get
+            Return EntityData.ItemIds.Count <> 0
+        End Get
+    End Property
+
     Public Sub AddItem(item As IItem) Implements IInventoryEntity(Of TEntityType).AddItem
         EntityData.ItemIds.Add(item.ItemId)
     End Sub
