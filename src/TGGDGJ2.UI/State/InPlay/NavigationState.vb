@@ -7,6 +7,8 @@ Friend Class NavigationState
     Const MAP_OFFSET_COLUMN = 1
     Const STATUS_OFFSET_COLUMN = 34
     Const OFFSET_ROW = 1
+    Const INVENTORY_OFFSET_ROW = OFFSET_ROW + 4
+    Const INVENTORY_COLUMNS = 13
 
     Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String()))
         MyBase.New(buffer, world, doEvent)
@@ -44,6 +46,12 @@ Friend Class NavigationState
         buffer.WriteText((STATUS_OFFSET_COLUMN, OFFSET_ROW + 2), Counters.Satiety, 0)
         Dim satiety = world.Avatar.GetCounter(Counters.Satiety)
         buffer.WriteText((STATUS_OFFSET_COLUMN, OFFSET_ROW + 3), $"{satiety.Value}/{satiety.Maximum}", 0)
+        buffer.WriteText((STATUS_OFFSET_COLUMN, INVENTORY_OFFSET_ROW), "==Inventory==", 0)
+        Dim index As Integer = 0
+        For Each item In world.Avatar.Items
+            buffer.SetPixel(STATUS_OFFSET_COLUMN + index Mod INVENTORY_COLUMNS, INVENTORY_OFFSET_ROW + 1 + index \ INVENTORY_COLUMNS, item.Hue)
+            index += 1
+        Next
     End Sub
 
     Private Function TryMove(directionName As String) As IUIState
@@ -62,6 +70,8 @@ Friend Class NavigationState
                 Return TryMove(Direction.South)
             Case Left
                 Return TryMove(Direction.West)
+            Case Green
+                Return New GameMenuState(buffer, world, doEvent)
         End Select
         Return Me
     End Function

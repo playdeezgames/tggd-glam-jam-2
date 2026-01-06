@@ -8,7 +8,7 @@
             Name,
             {
                 "################################",
-                "#                              #",
+                "#                             !#",
                 "#                              #",
                 "#                              #",
                 "#                              #",
@@ -32,7 +32,21 @@
                 CreateDoor(location, context)
             Case "x"c
                 CreateDestination(location, context)
+            Case "!"c
+                CreateSign(location)
         End Select
+    End Sub
+
+    Private Sub CreateSign(location As ILocation)
+        Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
+        trigger.SetMessage(
+            "Food!",
+            "Yes, that's food down there.",
+            "You can pick it up into yer inventory,",
+            "just like the key.",
+            "Press <SPACE> to bring up the action menu,",
+            "and see if you can figure out how to eat it.")
+        location.BumpTrigger = trigger
     End Sub
 
     Private Sub CreateDestination(location As ILocation, context As Dictionary(Of String, Object))
@@ -55,6 +69,7 @@
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
         Return If(gridCell = "#"c, WallLocationType.Instance,
             If(gridCell = "+"c, UnlockedDoorLocationType.Instance,
-            FloorLocationType.Instance))
+            If(gridCell = "!"c, SignLocationType.Instance,
+            FloorLocationType.Instance)))
     End Function
 End Class
