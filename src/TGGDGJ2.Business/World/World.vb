@@ -48,7 +48,7 @@ Public Class World
     End Property
 
     Private Shared ReadOnly initializationList As IEnumerable(Of IMapType) = {
-            StartingAreaMapType.Instance,
+            FirstMapType.Instance,
             SecondMapType.Instance,
             ThirdMapType.Instance
         }
@@ -111,7 +111,7 @@ Public Class World
     Private Shared ReadOnly mapTypes As IReadOnlyDictionary(Of String, IMapType) =
         New List(Of IMapType) From
         {
-            StartingAreaMapType.Instance,
+            FirstMapType.Instance,
             SecondMapType.Instance,
             ThirdMapType.Instance
         }.ToDictionary(Function(x) x.MapTypeName, Function(x) x)

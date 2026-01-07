@@ -1,6 +1,6 @@
 ﻿Friend Module Grimoire
-    Friend ReadOnly StartingAreaDoorDestination As String = NameOf(StartingAreaDoorDestination)
-    Friend ReadOnly StartingAreaDoorExit As String = NameOf(StartingAreaDoorExit)
-    Friend ReadOnly SecondAreaDoorDestination As String = NameOf(SecondAreaDoorDestination)
-    Friend ReadOnly SecondAreaDoorExit As String = NameOf(SecondAreaDoorExit)
+    Friend ReadOnly FirstRoomEastDestination As String = NameOf(FirstRoomEastDestination)
+    Friend ReadOnly FirstRoomEastDoor As String = NameOf(FirstRoomEastDoor)
+    Friend ReadOnly SecondRoomNorthDestination As String = NameOf(SecondRoomNorthDestination)
+    Friend ReadOnly SecondRoomNorthDoor As String = NameOf(SecondRoomNorthDoor)
 End Module

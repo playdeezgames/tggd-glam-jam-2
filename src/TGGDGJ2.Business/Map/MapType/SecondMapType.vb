@@ -42,11 +42,11 @@
     End Sub
 
     Private Sub CreateNorthDestination(location As ILocation, context As Dictionary(Of String, Object))
-        context(Grimoire.SecondAreaDoorDestination) = location
+        context(Grimoire.SecondRoomNorthDestination) = location
     End Sub
 
     Private Sub CreateNorthDoor(location As ILocation, context As Dictionary(Of String, Object))
-        context(Grimoire.SecondAreaDoorExit) = location
+        context(Grimoire.SecondRoomNorthDoor) = location
         location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
     End Sub
 
@@ -63,12 +63,12 @@
     End Sub
 
     Private Sub CreateWestDestination(location As ILocation, context As Dictionary(Of String, Object))
-        CType(context(StartingAreaDoorExit), ILocation).BumpTrigger.Destination = location
+        CType(context(FirstRoomEastDoor), ILocation).BumpTrigger.Destination = location
     End Sub
 
     Private Sub CreateWestDoor(location As ILocation, context As Dictionary(Of String, Object))
         location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
-        location.BumpTrigger.Destination = CType(context(StartingAreaDoorDestination), ILocation)
+        location.BumpTrigger.Destination = CType(context(FirstRoomEastDestination), ILocation)
     End Sub
 
     Protected Overrides Function GetItemType(gridCell As Char) As IItemType

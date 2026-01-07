@@ -1,4 +1,4 @@
-﻿Friend Class StartingAreaMapType
+﻿Friend Class FirstMapType
     Inherits MapType
 
     Private Sub New()
@@ -24,7 +24,8 @@
             })
     End Sub
 
-    Private Shared Sub CreateDoor(location As ILocation)
+    Private Shared Sub CreateEastDoor(location As ILocation, context As Dictionary(Of String, Object))
+        context(FirstRoomEastDoor) = location
         location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
         Dim newLocation = location.Map.CreateLocation(location.Column, location.Row, LockedDoorLocationType.Instance)
         Dim trigger = location.CreateTrigger(UnlockTriggerType.Instance)
@@ -70,13 +71,16 @@
             Case "!"c
                 CreateSign(location)
             Case "+"c
-                context(StartingAreaDoorExit) = location
-                CreateDoor(location)
+                CreateEastDoor(location, context)
             Case "x"c
-                context(StartingAreaDoorDestination) = location
+                CreateEastDestination(location, context)
         End Select
     End Sub
 
-    Friend Shared ReadOnly Name As String = NameOf(StartingAreaMapType)
-    Friend Shared ReadOnly Instance As New StartingAreaMapType
+    Private Sub CreateEastDestination(location As ILocation, context As Dictionary(Of String, Object))
+        context(FirstRoomEastDestination) = location
+    End Sub
+
+    Friend Shared ReadOnly Name As String = NameOf(FirstMapType)
+    Friend Shared ReadOnly Instance As New FirstMapType
 End Class
