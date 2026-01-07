@@ -23,6 +23,12 @@ Public Class Item
         End Get
     End Property
 
+    Public ReadOnly Property Name As String Implements IItem.Name
+        Get
+            Return EntityType.GetName(Me)
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As ItemData
         Get
             Return Data.Items(ItemId)

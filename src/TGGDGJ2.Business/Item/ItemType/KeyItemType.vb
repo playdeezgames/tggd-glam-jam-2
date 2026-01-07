@@ -12,4 +12,8 @@
     Public Overrides Function GetHue(item As IItem) As Integer
         Return Hue.KEY
     End Function
+
+    Public Overrides Function GetName(item As Item) As String
+        Return "Key"
+    End Function
 End Class
