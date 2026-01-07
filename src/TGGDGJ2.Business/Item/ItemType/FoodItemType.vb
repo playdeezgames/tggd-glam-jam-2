@@ -18,4 +18,13 @@
     Public Overrides Function GetName(item As Item) As String
         Return "Food"
     End Function
+
+    Public Overrides Function GetDescription(item As Item) As IEnumerable(Of String)
+        Return {
+            "It is food. You eat it. With yer mouth.",
+            "Not yer butt.",
+            " ",
+            "*NOT* yer butt."
+            }
+    End Function
 End Class

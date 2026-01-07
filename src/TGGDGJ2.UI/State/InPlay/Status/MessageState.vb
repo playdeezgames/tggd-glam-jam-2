@@ -25,7 +25,7 @@ Friend Class MessageState
         Select Case command
             Case UI.Command.Green
                 world.DismissMessage()
-                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+                Return InPlayState.Launch(buffer, world, doEvent)
             Case Else
                 Return Me
         End Select

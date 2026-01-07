@@ -61,6 +61,15 @@ Friend Class Character
         End Get
     End Property
 
+    Public Property CurrentItem As IItem Implements ICharacter.CurrentItem
+        Get
+            Return If(EntityData.CurrentItemId <> Guid.Empty, New Item(Data, EntityData.CurrentItemId, DoEvent), Nothing)
+        End Get
+        Set(value As IItem)
+            EntityData.CurrentItemId = If(value?.ItemId, Guid.Empty)
+        End Set
+    End Property
+
     Private ReadOnly DeltaX As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {

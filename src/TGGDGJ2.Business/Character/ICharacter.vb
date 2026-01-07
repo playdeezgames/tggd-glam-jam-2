@@ -11,4 +11,5 @@
     Sub Bump(location As ILocation)
     ReadOnly Property IsDead As Boolean
     Sub AddMessage(title As String, ParamArray lines As String())
+    Property CurrentItem As IItem
 End Interface

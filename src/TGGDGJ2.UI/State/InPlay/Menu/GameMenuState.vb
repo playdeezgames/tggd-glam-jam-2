@@ -14,6 +14,6 @@ Friend Class GameMenuState
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState
-        Return InPlayState.DetermineNextState(buffer, world, doEvent)
+        Return InPlayState.Launch(buffer, world, doEvent)
     End Function
 End Class

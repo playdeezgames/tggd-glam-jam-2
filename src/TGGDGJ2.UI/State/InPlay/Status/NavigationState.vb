@@ -56,7 +56,7 @@ Friend Class NavigationState
 
     Private Function TryMove(directionName As String) As IUIState
         world.Avatar.TryMove(directionName)
-        Return InPlayState.DetermineNextState(buffer, world, doEvent)
+        Return InPlayState.Launch(buffer, world, doEvent)
     End Function
 
 

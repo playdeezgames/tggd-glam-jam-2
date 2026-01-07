@@ -2,10 +2,10 @@
 Imports TGGDGJ2.Business
 
 Friend Module InPlayState
-    Friend Function DetermineNextState(
-                                      buffer As IUIBuffer(Of Integer),
-                                      world As IWorld,
-                                      doEvent As Action(Of String())) As IUIState
+    Friend Function Launch(
+                          buffer As IUIBuffer(Of Integer),
+                          world As IWorld,
+                          doEvent As Action(Of String())) As IUIState
         If world.HasMessage Then
             Return New MessageState(buffer, world, doEvent)
         End If

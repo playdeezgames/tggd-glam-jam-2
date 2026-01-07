@@ -22,7 +22,7 @@ Friend Class EmbarkMenu
                 Return New MainMenuState(buffer, world, doEvent, 0)
             Case Green, Blue
                 world.Initialize()
-                Return InPlayState.DetermineNextState(buffer, world, doEvent)
+                Return InPlayState.Launch(buffer, world, doEvent)
             Case Else
                 Return Me
         End Select

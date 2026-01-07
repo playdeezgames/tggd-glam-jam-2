@@ -16,4 +16,11 @@
     Public Overrides Function GetName(item As Item) As String
         Return "Key"
     End Function
+
+    Public Overrides Function GetDescription(item As Item) As IEnumerable(Of String)
+        Return {
+            "For putting into keyholes to unlock doors.",
+            "Do not place in butt. You may lose it."
+            }
+    End Function
 End Class

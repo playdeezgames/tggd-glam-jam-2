@@ -29,6 +29,12 @@ Public Class Item
         End Get
     End Property
 
+    Public ReadOnly Property Description As IEnumerable(Of String) Implements IItem.Description
+        Get
+            Return EntityType.GetDescription(Me)
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As ItemData
         Get
             Return Data.Items(ItemId)
