@@ -47,11 +47,18 @@ Public Class World
         End Get
     End Property
 
+    Private Shared ReadOnly initializationList As IEnumerable(Of IMapType) = {
+            StartingAreaMapType.Instance,
+            SecondMapType.Instance,
+            ThirdMapType.Instance
+        }
+
     Public Sub Initialize() Implements IWorld.Initialize
         Clear()
         Dim context As New Dictionary(Of String, Object)
-        Dim startingMap = CreateMap(StartingAreaMapType.Instance, context)
-        Dim secondMap = CreateMap(SecondMapType.Instance, context)
+        For Each mapType In initializationList
+            CreateMap(mapType, context)
+        Next
     End Sub
 
     Public Function CreateMap(mapType As IMapType, context As Dictionary(Of String, Object)) As IMap Implements IWorld.CreateMap
@@ -105,7 +112,8 @@ Public Class World
         New List(Of IMapType) From
         {
             StartingAreaMapType.Instance,
-            SecondMapType.Instance
+            SecondMapType.Instance,
+            ThirdMapType.Instance
         }.ToDictionary(Function(x) x.MapTypeName, Function(x) x)
 
     Private Shared ReadOnly itemTypes As IReadOnlyDictionary(Of String, IItemType) =

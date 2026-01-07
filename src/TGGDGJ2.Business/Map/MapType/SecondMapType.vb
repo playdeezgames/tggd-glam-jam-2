@@ -7,8 +7,8 @@
         MyBase.New(
             Name,
             {
-                "################################",
-                "#                             !#",
+                "################^###############",
+                "#               .             !#",
                 "#                              #",
                 "#                              #",
                 "#                              #",
@@ -29,12 +29,25 @@
     Protected Overrides Sub PostProcess(gridCell As Char, location As ILocation, context As Dictionary(Of String, Object))
         Select Case gridCell
             Case "+"c
-                CreateDoor(location, context)
+                CreateWestDoor(location, context)
             Case "x"c
-                CreateDestination(location, context)
+                CreateWestDestination(location, context)
             Case "!"c
                 CreateSign(location)
+            Case "^"c
+                CreateNorthDoor(location, context)
+            Case "."c
+                CreateNorthDestination(location, context)
         End Select
+    End Sub
+
+    Private Sub CreateNorthDestination(location As ILocation, context As Dictionary(Of String, Object))
+        context(Grimoire.SecondAreaDoorDestination) = location
+    End Sub
+
+    Private Sub CreateNorthDoor(location As ILocation, context As Dictionary(Of String, Object))
+        context(Grimoire.SecondAreaDoorExit) = location
+        location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
     End Sub
 
     Private Sub CreateSign(location As ILocation)
@@ -49,11 +62,11 @@
         location.BumpTrigger = trigger
     End Sub
 
-    Private Sub CreateDestination(location As ILocation, context As Dictionary(Of String, Object))
+    Private Sub CreateWestDestination(location As ILocation, context As Dictionary(Of String, Object))
         CType(context(StartingAreaDoorExit), ILocation).BumpTrigger.Destination = location
     End Sub
 
-    Private Sub CreateDoor(location As ILocation, context As Dictionary(Of String, Object))
+    Private Sub CreateWestDoor(location As ILocation, context As Dictionary(Of String, Object))
         location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
         location.BumpTrigger.Destination = CType(context(StartingAreaDoorDestination), ILocation)
     End Sub
@@ -68,7 +81,7 @@
 
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
         Return If(gridCell = "#"c, WallLocationType.Instance,
-            If(gridCell = "+"c, UnlockedDoorLocationType.Instance,
+            If(gridCell = "+"c OrElse gridCell = "^"c, UnlockedDoorLocationType.Instance,
             If(gridCell = "!"c, SignLocationType.Instance,
             FloorLocationType.Instance)))
     End Function
