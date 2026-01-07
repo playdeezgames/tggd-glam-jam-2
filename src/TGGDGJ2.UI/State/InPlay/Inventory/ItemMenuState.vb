@@ -29,7 +29,21 @@ Friend Class ItemMenuState
                                              Return InventoryMenuState.Launch(buffer, world, doEvent)
                                          End Function)
             }
+        For Each verbType In world.Avatar.CurrentItem.AvailableVerbs.Where(Function(x) x.CanPerform(world.Avatar))
+            choices.Add(New Choice(verbType.Name, DoVerb(buffer, world, doEvent, verbType)))
+        Next
         Return New Menu((0, 5), choices.ToArray, 0)
+    End Function
+
+    Private Function DoVerb(
+                           buffer As IUIBuffer(Of Integer),
+                           world As IWorld,
+                           doEvent As Action(Of String()),
+                           verbType As IVerbType) As Func(Of IUIState)
+        Return Function()
+                   verbType.Perform(world.Avatar)
+                   Return InPlayState.Launch(buffer, world, doEvent)
+               End Function
     End Function
 
     Public Overrides Sub Refresh()

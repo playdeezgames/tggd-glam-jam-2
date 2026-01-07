@@ -35,6 +35,12 @@ Public Class Item
         End Get
     End Property
 
+    Public ReadOnly Property AvailableVerbs As IEnumerable(Of IVerbType) Implements IItem.AvailableVerbs
+        Get
+            Return EntityType.VerbTypes
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As ItemData
         Get
             Return Data.Items(ItemId)

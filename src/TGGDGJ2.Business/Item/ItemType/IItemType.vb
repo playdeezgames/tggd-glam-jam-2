@@ -4,4 +4,5 @@
     Function GetHue(item As IItem) As Integer
     Function GetName(item As Item) As String
     Function GetDescription(item As Item) As IEnumerable(Of String)
+    ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
 End Interface

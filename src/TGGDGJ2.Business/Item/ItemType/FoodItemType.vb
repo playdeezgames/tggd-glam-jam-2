@@ -8,6 +8,15 @@
         MyBase.New(Name)
     End Sub
 
+    Public Overrides ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
+        Get
+            Return {
+                EatVerbType.Instance,
+                InsertVerbType.Instance
+                }
+        End Get
+    End Property
+
     Public Overrides Sub Initialize(result As IItem)
     End Sub
 
