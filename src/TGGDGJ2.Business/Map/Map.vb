@@ -29,6 +29,12 @@ Friend Class Map
         End Get
     End Property
 
+    Public ReadOnly Property Locations As IEnumerable(Of ILocation) Implements IMap.Locations
+        Get
+            Return EntityData.LocationIds.Distinct.Where(Function(x) x <> Guid.Empty).Select(Function(x) New Location(Data, x, DoEvent))
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As MapData
         Get
             Return Data.Maps(MapId)
@@ -37,6 +43,17 @@ Friend Class Map
 
     Public Sub SetLocation(column As Integer, row As Integer, location As ILocation) Implements IMap.SetLocation
         EntityData.LocationIds(column + row * Columns) = If(location IsNot Nothing, location.LocationId, Guid.Empty)
+    End Sub
+
+    Public Sub Update() Implements IMap.Update
+        Dim updatedCharacterIds As New HashSet(Of Guid)
+        For Each location In Locations
+            Dim character = location.Character
+            If character IsNot Nothing AndAlso Not updatedCharacterIds.Contains(character.CharacterId) Then
+                updatedCharacterIds.Add(character.CharacterId)
+                character.Update()
+            End If
+        Next
     End Sub
 
     Public Function CreateLocation(column As Integer, row As Integer, locationType As ILocationType) As ILocation Implements IMap.CreateLocation

@@ -106,7 +106,7 @@ Friend Class Character
     End Sub
 
     Public Function CanEnter(location As ILocation) As Boolean Implements ICharacter.CanEnter
-        Return EntityType.CanEnter(Me, location)
+        Return EntityType.CanEnter(Me, location) AndAlso location.Character Is Nothing
     End Function
 
     Public Sub Enter(location As ILocation) Implements ICharacter.Enter
@@ -123,5 +123,9 @@ Friend Class Character
 
     Public Sub AddMessage(title As String, ParamArray lines() As String) Implements ICharacter.AddMessage
         EntityType.AddMessage(Me, title, lines)
+    End Sub
+
+    Public Sub Update() Implements ICharacter.Update
+        EntityType.Update(Me)
     End Sub
 End Class

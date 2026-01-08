@@ -23,16 +23,11 @@
             location.RemoveItem(item)
             character.AddItem(item)
         Next
+        character.Map.Update()
     End Sub
 
     Public Overrides Sub Leave(character As ICharacter, location As ILocation)
         MyBase.Leave(character, location)
-        Dim satiety = character.GetCounter(Counters.Satiety)
-        If satiety.Value > 0 Then
-            satiety.Value -= 1
-        Else
-            character.GetCounter(Counters.Health).Value -= 1
-        End If
     End Sub
 
     Public Overrides Sub Bump(character As ICharacter, location As ILocation)
@@ -47,5 +42,14 @@
 
     Public Overrides Sub AddMessage(character As ICharacter, title As String, ParamArray lines() As String)
         character.World.AddMessage(title, lines)
+    End Sub
+
+    Public Overrides Sub Update(character As ICharacter)
+        Dim satiety = character.GetCounter(Counters.Satiety)
+        If satiety.Value > 0 Then
+            satiety.Value -= 1
+        Else
+            character.GetCounter(Counters.Health).Value -= 1
+        End If
     End Sub
 End Class
