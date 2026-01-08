@@ -144,6 +144,7 @@ Public Class World
     Private Shared ReadOnly characterTypes As IReadOnlyDictionary(Of String, ICharacterType) =
         New List(Of ICharacterType) From
         {
-            N00bCharacterType.Instance
+            N00bCharacterType.Instance,
+            KoboldCharacterType.Instance
         }.ToDictionary(Function(x) x.CharacterTypeName, Function(x) x)
 End Class

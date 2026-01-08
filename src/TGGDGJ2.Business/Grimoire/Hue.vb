@@ -6,6 +6,7 @@
     Friend Const SIGN = 132
 
     Friend Const N00B = 160
+    Friend Const KOBOLD = 161
 
     Friend Const KEY = 192
     Friend Const FOOD = 193
