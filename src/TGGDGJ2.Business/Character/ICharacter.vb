@@ -12,5 +12,7 @@
     ReadOnly Property IsDead As Boolean
     Sub AddMessage(title As String, ParamArray lines As String())
     Sub Update()
+    Sub StartInteration(target As ICharacter)
     Property CurrentItem As IItem
+    Property InteractionTarget As ICharacter
 End Interface

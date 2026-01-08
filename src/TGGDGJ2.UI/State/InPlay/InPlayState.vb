@@ -12,6 +12,9 @@ Friend Module InPlayState
         If world.Avatar.IsDead Then
             Return New DeadState(buffer, world, doEvent)
         End If
+        If world.Avatar.InteractionTarget IsNot Nothing Then
+            Return New InteractionState(buffer, world, doEvent)
+        End If
         Return New NavigationState(buffer, world, doEvent)
     End Function
 End Module

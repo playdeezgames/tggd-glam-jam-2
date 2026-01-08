@@ -70,6 +70,18 @@ Friend Class Character
         End Set
     End Property
 
+    Public Property InteractionTarget As ICharacter Implements ICharacter.InteractionTarget
+        Get
+            Return If(
+                EntityData.InteractionTargetId <> Guid.Empty,
+                New Character(Data, EntityData.InteractionTargetId, DoEvent),
+                Nothing)
+        End Get
+        Set(value As ICharacter)
+            EntityData.InteractionTargetId = If(value?.CharacterId, Guid.Empty)
+        End Set
+    End Property
+
     Private ReadOnly DeltaX As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {
@@ -127,5 +139,10 @@ Friend Class Character
 
     Public Sub Update() Implements ICharacter.Update
         EntityType.Update(Me)
+    End Sub
+
+    Public Sub StartInteration(target As ICharacter) Implements ICharacter.StartInteration
+        InteractionTarget = target
+        EntityType.StartInteraction(Me)
     End Sub
 End Class

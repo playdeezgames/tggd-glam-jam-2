@@ -18,6 +18,7 @@
 
     Public MustOverride Sub AddMessage(character As ICharacter, title As String, ParamArray lines() As String) Implements ICharacterType.AddMessage
     Public MustOverride Sub Update(character As ICharacter) Implements ICharacterType.Update
+    Public MustOverride Sub StartInteraction(character As ICharacter) Implements ICharacterType.StartInteraction
     Public MustOverride Function GetHue(character As ICharacter) As Integer Implements ICharacterType.GetHue
 
     Public Function CanEnter(character As ICharacter, location As ILocation) As Boolean Implements ICharacterType.CanEnter

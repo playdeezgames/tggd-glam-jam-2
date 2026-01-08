@@ -32,11 +32,16 @@
 
     Public Overrides Sub Bump(character As ICharacter, location As ILocation)
         MyBase.Bump(character, location)
-        Dim trigger = location.BumpTrigger
-        If trigger IsNot Nothing Then
-            trigger.Fire(
+        Dim target = location.Character
+        If target IsNot Nothing Then
+            character.StartInteration(target)
+        Else
+            Dim trigger = location.BumpTrigger
+            If trigger IsNot Nothing Then
+                trigger.Fire(
                 character:=character,
                 location:=location)
+            End If
         End If
     End Sub
 
@@ -51,5 +56,8 @@
         Else
             character.GetCounter(Counters.Health).Value -= 1
         End If
+    End Sub
+
+    Public Overrides Sub StartInteraction(character As ICharacter)
     End Sub
 End Class
