@@ -8,7 +8,18 @@
         MyBase.New(Name)
     End Sub
 
+    Public Overrides ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
+        Get
+            Return {
+                AttackVerbType.Instance
+                }
+        End Get
+    End Property
+
     Public Overrides Sub Initialize(character As ICharacter)
+        character.CreateCounter(Counters.Health, 100, 0, 100)
+        character.CreateCounter(Counters.Attack, 100, 0, 100)
+        character.CreateCounter(Counters.Defend, 0, 0, 0)
     End Sub
 
     Public Overrides Sub AddMessage(character As ICharacter, title As String, ParamArray lines() As String)
@@ -36,5 +47,9 @@
 
     Public Overrides Function GetHue(character As ICharacter) As Integer
         Return Hue.KOBOLD
+    End Function
+
+    Public Overrides Function GetName(character As ICharacter) As String
+        Return "Kobold"
     End Function
 End Class

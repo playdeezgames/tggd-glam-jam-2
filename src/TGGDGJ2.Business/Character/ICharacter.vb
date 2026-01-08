@@ -1,5 +1,6 @@
 ﻿Public Interface ICharacter
     Inherits IInventoryEntity(Of ICharacterType)
+    ReadOnly Property Name As String
     ReadOnly Property CharacterId As Guid
     ReadOnly Property Map As IMap
     ReadOnly Property Hue As Integer
@@ -15,4 +16,5 @@
     Sub StartInteration(target As ICharacter)
     Property CurrentItem As IItem
     Property InteractionTarget As ICharacter
+    ReadOnly Property AvailableVerbs As IEnumerable(Of IVerbType)
 End Interface

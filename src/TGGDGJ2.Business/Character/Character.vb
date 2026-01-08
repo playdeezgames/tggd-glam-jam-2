@@ -82,6 +82,18 @@ Friend Class Character
         End Set
     End Property
 
+    Public ReadOnly Property AvailableVerbs As IEnumerable(Of IVerbType) Implements ICharacter.AvailableVerbs
+        Get
+            Return EntityType.VerbTypes
+        End Get
+    End Property
+
+    Public ReadOnly Property Name As String Implements ICharacter.Name
+        Get
+            Return EntityType.GetName(Me)
+        End Get
+    End Property
+
     Private ReadOnly DeltaX As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {

@@ -54,7 +54,7 @@
     End Function
 
     Protected Overrides Function GetCharacterType(gridCell As Char) As ICharacterType
-        Return If(gridCell = "@"c, N00bCharacterType.Instance, Nothing)
+        Return If(gridCell = "@"c, GummerellaCharacterType.Instance, Nothing)
     End Function
 
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType

@@ -1,13 +1,21 @@
-﻿Friend Class N00bCharacterType
+﻿Friend Class GummerellaCharacterType
     Inherits CharacterType
 
     Public Overrides Sub Initialize(character As ICharacter)
         character.CreateCounter(Counters.Satiety, 100, 0, 100)
         character.CreateCounter(Counters.Health, 100, 0, 100)
+        character.CreateCounter(Counters.Attack, 0, 0, 0)
+        character.CreateCounter(Counters.Defend, 0, 0, 0)
     End Sub
 
-    Friend Shared ReadOnly Name As String = NameOf(N00bCharacterType)
-    Friend Shared ReadOnly Instance As ICharacterType = New N00bCharacterType()
+    Friend Shared ReadOnly Name As String = NameOf(GummerellaCharacterType)
+    Friend Shared ReadOnly Instance As ICharacterType = New GummerellaCharacterType()
+
+    Public Overrides ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
+        Get
+            Return Array.Empty(Of IVerbType)
+        End Get
+    End Property
 
     Public Sub New()
         MyBase.New(Name)
@@ -60,4 +68,8 @@
 
     Public Overrides Sub StartInteraction(character As ICharacter)
     End Sub
+
+    Public Overrides Function GetName(character As ICharacter) As String
+        Return "Gummerella"
+    End Function
 End Class

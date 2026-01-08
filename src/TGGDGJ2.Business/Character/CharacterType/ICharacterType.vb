@@ -9,4 +9,6 @@
     Sub StartInteraction(character As ICharacter)
     Function GetHue(character As ICharacter) As Integer
     Function CanEnter(character As ICharacter, location As ILocation) As Boolean
+    Function GetName(character As ICharacter) As String
+    ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
 End Interface

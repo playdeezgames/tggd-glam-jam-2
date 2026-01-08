@@ -5,6 +5,7 @@
     End Sub
 
     Public ReadOnly Property CharacterTypeName As String Implements ICharacterType.CharacterTypeName
+    Public MustOverride ReadOnly Property VerbTypes As IEnumerable(Of IVerbType) Implements ICharacterType.VerbTypes
     Public MustOverride Sub Initialize(character As ICharacter) Implements ICharacterType.Initialize
     Public Overridable Sub Enter(character As ICharacter, location As ILocation) Implements ICharacterType.Enter
         location.EntityType.HandleEnter(location, character)
@@ -24,4 +25,6 @@
     Public Function CanEnter(character As ICharacter, location As ILocation) As Boolean Implements ICharacterType.CanEnter
         Return location.EntityTypeName = FloorLocationType.Name
     End Function
+
+    Public MustOverride Function GetName(character As ICharacter) As String Implements ICharacterType.GetName
 End Class
