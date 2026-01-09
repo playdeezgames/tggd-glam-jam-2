@@ -59,6 +59,7 @@
 
     Private Sub CreateNorthDoor(location As ILocation, context As Dictionary(Of String, Object))
         context(Grimoire.ThirdRoomNorthDoor) = location
+        location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
     End Sub
 
     Private Sub CreateSouthDoorDestination(location As ILocation, context As Dictionary(Of String, Object))

@@ -50,7 +50,8 @@ Public Class World
     Private Shared ReadOnly initializationList As IEnumerable(Of IMapType) = {
             FirstMapType.Instance,
             SecondMapType.Instance,
-            ThirdMapType.Instance
+            ThirdMapType.Instance,
+            FourthMapType.Instance
         }
 
     Public Sub Initialize() Implements IWorld.Initialize
@@ -113,7 +114,8 @@ Public Class World
         {
             FirstMapType.Instance,
             SecondMapType.Instance,
-            ThirdMapType.Instance
+            ThirdMapType.Instance,
+            FourthMapType.Instance
         }.ToDictionary(Function(x) x.MapTypeName, Function(x) x)
 
     Private Shared ReadOnly itemTypes As IReadOnlyDictionary(Of String, IItemType) =
