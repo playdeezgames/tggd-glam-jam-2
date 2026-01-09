@@ -122,7 +122,10 @@ Public Class World
         New List(Of IItemType) From
         {
             KeyItemType.Instance,
-            FoodItemType.Instance
+            FoodItemType.Instance,
+            KnifeItemType.Instance,
+            PotionItemType.Instance,
+            ShieldItemType.Instance
         }.ToDictionary(Function(x) x.ItemTypeName, Function(x) x)
 
     Private Shared ReadOnly triggerTypes As IReadOnlyDictionary(Of String, ITriggerType) =

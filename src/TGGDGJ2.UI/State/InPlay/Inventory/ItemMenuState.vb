@@ -32,7 +32,7 @@ Friend Class ItemMenuState
         For Each verbType In world.Avatar.CurrentItem.AvailableVerbs.Where(Function(x) x.CanPerform(world.Avatar))
             choices.Add(New Choice(verbType.Name, DoVerb(buffer, world, doEvent, verbType)))
         Next
-        Return New Menu((0, 5), choices.ToArray, 0)
+        Return New Menu((0, 8), choices.ToArray, 0)
     End Function
 
     Private Function DoVerb(

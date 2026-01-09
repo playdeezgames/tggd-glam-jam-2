@@ -10,4 +10,7 @@
 
     Friend Const KEY = 192
     Friend Const FOOD = 193
+    Friend Const KNIFE = 194
+    Friend Const POTION = 195
+    Friend Const SHIELD = 196
 End Module

@@ -9,6 +9,8 @@
             Name,
             {
                 "################################",
+                "#ff                           /#",
+                "#ff                            #",
                 "#                              #",
                 "#                              #",
                 "#                              #",
@@ -20,9 +22,7 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#                              #",
-                "#                              #",
-                "#               x              #",
+                "#!              x             )#",
                 "################+###############"
             })
     End Sub
@@ -46,7 +46,10 @@
     End Sub
 
     Protected Overrides Function GetItemType(gridCell As Char) As IItemType
-        Return Nothing
+        Return If(gridCell = "f"c, FoodItemType.Instance,
+            If(gridCell = "/"c, KnifeItemType.Instance,
+            If(gridCell = ")"c, ShieldItemType.Instance,
+            Nothing)))
     End Function
 
     Protected Overrides Function GetCharacterType(gridCell As Char) As ICharacterType
