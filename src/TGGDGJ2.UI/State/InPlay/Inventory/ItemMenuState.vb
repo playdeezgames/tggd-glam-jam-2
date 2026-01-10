@@ -16,6 +16,7 @@ Friend Class ItemMenuState
             world,
             doEvent)
         menu = CreateMenu(buffer, world, doEvent)
+        frame.Box(0, 0, buffer.Columns, 3, True)
     End Sub
 
     Private Function CreateMenu(
@@ -32,7 +33,7 @@ Friend Class ItemMenuState
         For Each verbType In world.Avatar.CurrentItem.AvailableVerbs.Where(Function(x) x.CanPerform(world.Avatar))
             choices.Add(New Choice(verbType.Name, DoVerb(buffer, world, doEvent, verbType)))
         Next
-        Return New Menu((0, 8), choices.ToArray, 0)
+        Return New Menu((0, 0), choices.ToArray, 0)
     End Function
 
     Private Function DoVerb(
@@ -49,12 +50,14 @@ Friend Class ItemMenuState
     Public Overrides Sub Refresh()
         Dim item = world.Avatar.CurrentItem
         buffer.Fill(32)
-        buffer.WriteText((0, 0), $"{item.Name}", 0)
-        Dim position = (0, 1)
+        buffer.WriteCenteredText(1, $"{item.Name}", 0)
+        Dim position = (0, 3)
         For Each line In item.Description
             position = buffer.WriteLine(position, line, 0)
         Next
+        menu.Position = (position.Item1, position.Item2 + 1)
         menu.Render(buffer)
+        buffer.DrawFrame((0, 0), frame)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

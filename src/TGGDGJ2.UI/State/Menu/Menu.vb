@@ -2,7 +2,7 @@
 
 Friend Class Menu
     Private ReadOnly choices As Choice()
-    Private ReadOnly position As (Column As Integer, Row As Integer)
+    Property Position As (Column As Integer, Row As Integer)
     Private choiceIndex As Integer
 
     Sub New(position As (Column As Integer, Row As Integer), choices As Choice(), choiceIndex As Integer)
