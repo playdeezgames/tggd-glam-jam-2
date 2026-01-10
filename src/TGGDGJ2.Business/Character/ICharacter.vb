@@ -20,4 +20,5 @@
     Property Weapon As IItem
     Property Armor As IItem
     ReadOnly Property HasEquipment As Boolean
+    ReadOnly Property Description As IEnumerable(Of String)
 End Interface

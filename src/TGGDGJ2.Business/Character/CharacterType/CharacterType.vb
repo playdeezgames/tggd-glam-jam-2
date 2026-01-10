@@ -27,4 +27,5 @@
     End Function
 
     Public MustOverride Function GetName(character As ICharacter) As String Implements ICharacterType.GetName
+    Public MustOverride Function GetDescription(character As ICharacter) As IEnumerable(Of String) Implements ICharacterType.GetDescription
 End Class

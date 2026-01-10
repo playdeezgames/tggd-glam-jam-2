@@ -52,4 +52,12 @@
     Public Overrides Function GetName(character As ICharacter) As String
         Return "Kobold"
     End Function
+
+    Public Overrides Function GetDescription(character As ICharacter) As IEnumerable(Of String)
+        Return {
+            "This is a kobold.",
+            "It wants to eat you.",
+            "And not in the good way."
+            }
+    End Function
 End Class

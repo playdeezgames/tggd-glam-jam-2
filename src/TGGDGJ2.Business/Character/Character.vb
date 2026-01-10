@@ -120,6 +120,12 @@ Friend Class Character
         End Get
     End Property
 
+    Public ReadOnly Property Description As IEnumerable(Of String) Implements ICharacter.Description
+        Get
+            Return EntityType.GetDescription(Me)
+        End Get
+    End Property
+
     Private ReadOnly DeltaX As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {

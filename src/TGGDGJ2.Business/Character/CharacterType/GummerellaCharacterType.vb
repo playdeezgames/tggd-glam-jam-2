@@ -72,4 +72,12 @@
     Public Overrides Function GetName(character As ICharacter) As String
         Return "Gummerella"
     End Function
+
+    Public Overrides Function GetDescription(character As ICharacter) As IEnumerable(Of String)
+        Return {
+            "You are Gummerella.",
+            "You are a gummy creature, with all of the advantages and disadvantages of being a gummy creature.",
+            "The main disadvantage is that you are absolutely delicious."
+            }
+    End Function
 End Class

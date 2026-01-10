@@ -9,6 +9,7 @@ Friend Class InteractionState
     Public Sub New(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String()))
         MyBase.New(buffer, world, doEvent)
         menu = CreateMenu(buffer, world, doEvent)
+        frame.Box(0, 0, buffer.Columns, 3, True)
     End Sub
 
     Private Function CreateMenu(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String())) As Menu
@@ -27,8 +28,14 @@ Friend Class InteractionState
 
     Public Overrides Sub Refresh()
         buffer.Fill(32)
-        buffer.WriteText((0, 0), "TODO: interaction", 0)
+        buffer.WriteCenteredText(1, world.Avatar.InteractionTarget.Name, 0)
+        Dim position = (0, 3)
+        For Each line In world.Avatar.InteractionTarget.Description
+            position = buffer.WriteLine(position, line, 0)
+        Next
+        menu.Position = (position.Item1, position.Item2 + 1)
         menu.Render(buffer)
+        buffer.DrawFrame((0, 0), frame)
     End Sub
     Private Function DoVerb(
                            buffer As IUIBuffer(Of Integer),

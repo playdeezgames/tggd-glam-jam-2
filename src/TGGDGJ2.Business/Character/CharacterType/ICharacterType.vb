@@ -10,5 +10,6 @@
     Function GetHue(character As ICharacter) As Integer
     Function CanEnter(character As ICharacter, location As ILocation) As Boolean
     Function GetName(character As ICharacter) As String
+    Function GetDescription(character As ICharacter) As IEnumerable(Of String)
     ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
 End Interface
