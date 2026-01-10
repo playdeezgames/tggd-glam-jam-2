@@ -18,6 +18,9 @@ Friend Class ActionMenuState
         If world.Avatar.HasItems Then
             result.Add(New Choice("Inventory", Function() InventoryMenuState.Launch(buffer, world, doEvent)))
         End If
+        If world.Avatar.HasEquipment Then
+            result.Add(New Choice("Equipment", Function() EquipmentMenuState.Launch(buffer, world, doEvent)))
+        End If
         result.Add(New Choice("Game Menu", Function() New GameMenuState(buffer, world, doEvent)))
         Return result
     End Function

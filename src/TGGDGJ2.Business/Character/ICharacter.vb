@@ -17,4 +17,7 @@
     Property CurrentItem As IItem
     Property InteractionTarget As ICharacter
     ReadOnly Property AvailableVerbs As IEnumerable(Of IVerbType)
+    Property Weapon As IItem
+    Property Armor As IItem
+    ReadOnly Property HasEquipment As Boolean
 End Interface

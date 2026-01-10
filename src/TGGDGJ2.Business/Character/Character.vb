@@ -94,6 +94,32 @@ Friend Class Character
         End Get
     End Property
 
+    Public Property Weapon As IItem Implements ICharacter.Weapon
+        Get
+            Dim itemId = EntityData.WeaponItemId
+            Return If(itemId <> Guid.Empty, New Item(Data, itemId, DoEvent), Nothing)
+        End Get
+        Set(value As IItem)
+            EntityData.WeaponItemId = If(value?.ItemId, Guid.Empty)
+        End Set
+    End Property
+
+    Public Property Armor As IItem Implements ICharacter.Armor
+        Get
+            Dim itemId = EntityData.ArmorItemId
+            Return If(itemId <> Guid.Empty, New Item(Data, itemId, DoEvent), Nothing)
+        End Get
+        Set(value As IItem)
+            EntityData.ArmorItemId = If(value?.ItemId, Guid.Empty)
+        End Set
+    End Property
+
+    Public ReadOnly Property HasEquipment As Boolean Implements ICharacter.HasEquipment
+        Get
+            Return Armor IsNot Nothing OrElse Weapon IsNot Nothing
+        End Get
+    End Property
+
     Private ReadOnly DeltaX As IReadOnlyDictionary(Of String, Integer) =
         New Dictionary(Of String, Integer) From
         {

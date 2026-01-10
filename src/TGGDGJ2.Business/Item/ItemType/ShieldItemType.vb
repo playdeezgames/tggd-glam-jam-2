@@ -11,7 +11,8 @@
     Public Overrides ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
         Get
             Return {
-                InsertVerbType.Instance
+                InsertVerbType.Instance,
+                WearVerbType.Instance
                 }
         End Get
     End Property
