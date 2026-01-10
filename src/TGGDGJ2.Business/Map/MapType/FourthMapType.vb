@@ -9,7 +9,7 @@
             Name,
             {
                 "################################",
-                "#ff                           /#",
+                "#pf                           /#",
                 "#ff                            #",
                 "#                              #",
                 "#                              #",
@@ -47,9 +47,10 @@
 
     Protected Overrides Function GetItemType(gridCell As Char) As IItemType
         Return If(gridCell = "f"c, FoodItemType.Instance,
+            If(gridCell = "p"c, PotionItemType.Instance,
             If(gridCell = "/"c, KnifeItemType.Instance,
             If(gridCell = ")"c, ShieldItemType.Instance,
-            Nothing)))
+            Nothing))))
     End Function
 
     Protected Overrides Function GetCharacterType(gridCell As Char) As ICharacterType

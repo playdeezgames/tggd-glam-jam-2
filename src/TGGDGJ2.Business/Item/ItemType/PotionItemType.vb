@@ -11,6 +11,7 @@
     Public Overrides ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
         Get
             Return {
+                DrinkVerbType.Instance,
                 InsertVerbType.Instance
                 }
         End Get
