@@ -21,4 +21,6 @@
     Property Armor As IItem
     ReadOnly Property HasEquipment As Boolean
     ReadOnly Property Description As IEnumerable(Of String)
+    Function GetAttackValue() As Integer
+    Function GetDefendValue() As Integer
 End Interface

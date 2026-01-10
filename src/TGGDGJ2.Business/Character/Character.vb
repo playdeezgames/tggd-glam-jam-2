@@ -189,4 +189,12 @@ Friend Class Character
         InteractionTarget = target
         EntityType.StartInteraction(Me)
     End Sub
+
+    Public Function GetAttackValue() As Integer Implements ICharacter.GetAttackValue
+        Return If(GetCounter(Counters.Attack)?.Value, 0) + If(Weapon?.GetCounter(Counters.Attack)?.Value, 0)
+    End Function
+
+    Public Function GetDefendValue() As Integer Implements ICharacter.GetDefendValue
+        Return If(GetCounter(Counters.Defend)?.Value, 0) + If(Armor?.GetCounter(Counters.Defend)?.Value, 0)
+    End Function
 End Class

@@ -26,9 +26,9 @@ Public Class AttackVerbType
     Private Sub DoAttack(attacker As ICharacter, defender As ICharacter)
         Dim lines As New List(Of String)
         lines.Add($"{attacker.Name} attacks {defender.Name}!")
-        Dim attack = attacker.GetCounter(Counters.Attack).Value
+        Dim attack = attacker.GetAttackValue()
         lines.Add($"{attacker.Name} has an attack strength of {attack}!")
-        Dim defend = defender.GetCounter(Counters.Defend).Value
+        Dim defend = defender.GetDefendValue()
         lines.Add($"{defender.Name} has a defend strength of {defend}!")
         Dim damage = Math.Max(attack - defend, 0)
         lines.Add($"{defender.Name} takes {damage} points of damage!")

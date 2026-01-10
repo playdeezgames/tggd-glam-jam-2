@@ -18,6 +18,7 @@
     End Property
 
     Public Overrides Sub Initialize(result As IItem)
+        result.CreateCounter(Counters.Defend, 50, 50, 50)
     End Sub
 
     Public Overrides Function GetHue(item As IItem) As Integer
