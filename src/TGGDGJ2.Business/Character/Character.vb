@@ -197,4 +197,8 @@ Friend Class Character
     Public Function GetDefendValue() As Integer Implements ICharacter.GetDefendValue
         Return If(GetCounter(Counters.Defend)?.Value, 0) + If(Armor?.GetCounter(Counters.Defend)?.Value, 0)
     End Function
+
+    Public Sub Die() Implements ICharacter.Die
+        EntityType.Die(Me)
+    End Sub
 End Class

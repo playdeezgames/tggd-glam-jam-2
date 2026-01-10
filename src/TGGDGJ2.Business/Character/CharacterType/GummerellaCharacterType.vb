@@ -1,6 +1,13 @@
 ﻿Friend Class GummerellaCharacterType
     Inherits CharacterType
 
+
+    Friend Shared ReadOnly Name As String = NameOf(GummerellaCharacterType)
+    Friend Shared ReadOnly Instance As ICharacterType = New GummerellaCharacterType()
+
+    Private Sub New()
+        MyBase.New(Name)
+    End Sub
     Public Overrides Sub Initialize(character As ICharacter)
         character.CreateCounter(Counters.Satiety, 100, 0, 100)
         character.CreateCounter(Counters.Health, 100, 0, 100)
@@ -8,18 +15,11 @@
         character.CreateCounter(Counters.Defend, 0, 0, 0)
     End Sub
 
-    Friend Shared ReadOnly Name As String = NameOf(GummerellaCharacterType)
-    Friend Shared ReadOnly Instance As ICharacterType = New GummerellaCharacterType()
-
     Public Overrides ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
         Get
             Return Array.Empty(Of IVerbType)
         End Get
     End Property
-
-    Public Sub New()
-        MyBase.New(Name)
-    End Sub
 
     Public Overrides Function GetHue(character As ICharacter) As Integer
         Return Hue.N00B
@@ -80,4 +80,7 @@
             "The main disadvantage is that you are absolutely delicious."
             }
     End Function
+
+    Public Overrides Sub Die(character As ICharacter)
+    End Sub
 End Class

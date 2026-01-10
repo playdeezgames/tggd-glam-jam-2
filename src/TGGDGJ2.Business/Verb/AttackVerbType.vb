@@ -19,7 +19,8 @@ Public Class AttackVerbType
         If Not character.InteractionTarget.IsDead Then
             DoAttack(character.InteractionTarget, character)
         Else
-            Throw New NotImplementedException("You need to eliminated the interaction target!")
+            character.InteractionTarget.Die()
+            character.InteractionTarget = Nothing
         End If
     End Sub
 

@@ -23,4 +23,5 @@
     ReadOnly Property Description As IEnumerable(Of String)
     Function GetAttackValue() As Integer
     Function GetDefendValue() As Integer
+    Sub Die()
 End Interface

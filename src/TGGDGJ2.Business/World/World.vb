@@ -152,6 +152,7 @@ Public Class World
         New List(Of ICharacterType) From
         {
             GummerellaCharacterType.Instance,
-            KoboldCharacterType.Instance
+            KoboldCharacterType.Instance,
+            SlugCharacterType.Instance
         }.ToDictionary(Function(x) x.CharacterTypeName, Function(x) x)
 End Class

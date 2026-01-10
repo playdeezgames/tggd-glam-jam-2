@@ -45,6 +45,10 @@
     Public Overrides Sub StartInteraction(character As ICharacter)
     End Sub
 
+    Public Overrides Sub Die(character As ICharacter)
+        Throw New NotImplementedException()
+    End Sub
+
     Public Overrides Function GetHue(character As ICharacter) As Integer
         Return Hue.KOBOLD
     End Function

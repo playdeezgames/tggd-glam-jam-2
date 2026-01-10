@@ -9,7 +9,7 @@
             Name,
             {
                 "################################",
-                "#                              #",
+                "#s                            s#",
                 "#                              #",
                 "#                              #",
                 "#                              #",
@@ -22,7 +22,7 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#                              #",
+                "#s                            s#",
                 "################################"
             })
     End Sub
@@ -37,7 +37,7 @@
     End Sub
 
     Private Shared Sub CreateEastDestination(location As ILocation, context As Dictionary(Of String, Object))
-        CType(context(ThirdRoomNorthDoor), ILocation).BumpTrigger.Destination = location
+        CType(context(FourthRoomWestDoor), ILocation).BumpTrigger.Destination = location
     End Sub
 
     Private Shared Sub CreateEastDoor(location As ILocation, context As Dictionary(Of String, Object))
@@ -50,7 +50,7 @@
     End Function
 
     Protected Overrides Function GetCharacterType(gridCell As Char) As ICharacterType
-        Return Nothing
+        Return If(gridCell = "s"c, SlugCharacterType.Instance, Nothing)
     End Function
 
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
