@@ -15,7 +15,7 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#                              #",
+                "^.                             #",
                 "#                              #",
                 "#                              #",
                 "#                              #",
@@ -33,7 +33,33 @@
                 CreateSouthDoor(location, context)
             Case "x"c
                 CreateSouthDestination(location, context)
+            Case "^"c
+                CreateWestDoor(location, context)
+            Case "."c
+                CreateWestDestination(location, context)
+            Case "!"c
+                CreateSign(location)
         End Select
+    End Sub
+
+    Private Sub CreateSign(location As ILocation)
+        Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
+        trigger.SetMessage(
+            "EQUIPMENT!",
+            "Look! Weapons, and armor, and shields! Oh my!",
+            "Maybe you can gear up and go back and take out",
+            "that kobold!",
+            "You should totally try it!")
+        location.BumpTrigger = trigger
+    End Sub
+
+    Private Sub CreateWestDestination(location As ILocation, context As Dictionary(Of String, Object))
+        context(Grimoire.FourthRoomWestDestination) = location
+    End Sub
+
+    Private Sub CreateWestDoor(location As ILocation, context As Dictionary(Of String, Object))
+        context(Grimoire.FourthRoomWestDoor) = location
+        location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
     End Sub
 
     Private Shared Sub CreateSouthDestination(location As ILocation, context As Dictionary(Of String, Object))
@@ -59,7 +85,8 @@
 
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
         Return If(gridCell = "#"c, WallLocationType.Instance,
-            If(gridCell = "+"c, UnlockedDoorLocationType.Instance,
-            FloorLocationType.Instance))
+            If(gridCell = "+"c OrElse gridCell = "^"c, UnlockedDoorLocationType.Instance,
+            If(gridCell = "!"c, SignLocationType.Instance,
+            FloorLocationType.Instance)))
     End Function
 End Class
