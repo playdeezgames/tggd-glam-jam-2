@@ -7,6 +7,7 @@ Friend Class TitleState
     Public Sub New(buffer As IUIBuffer(Of Integer), world As IWorld, doEvent As Action(Of String()))
         MyBase.New(buffer, world, doEvent)
         frame.Box(0, 0, buffer.Columns, 3, True)
+        frame.Box(5, 14, buffer.Columns - 10, 3, True)
     End Sub
 
     Public Overrides Sub Refresh()
@@ -22,7 +23,7 @@ Friend Class TitleState
         buffer.WriteCenteredText(10, "D,Right Arrow: Right", 0)
         buffer.WriteCenteredText(11, "Space: Action", 0)
         buffer.WriteCenteredText(12, "Backspace: Cancel", 0)
-        buffer.WriteCenteredText(15, "-Click Screen To Focus Keyboard Input-", 0)
+        buffer.WriteCenteredText(15, "Click Screen To Focus Keyboard Input", 0)
         buffer.WriteCenteredText(buffer.Rows - 1, "Press <SPACE>", 0)
     End Sub
 
