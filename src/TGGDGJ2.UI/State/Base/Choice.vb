@@ -5,7 +5,7 @@ Friend Class Choice
         Me.Text = text
         Me._choose = choose
     End Sub
-    ReadOnly Property Text As String
+    Property Text As String
     Private ReadOnly _choose As Func(Of IUIState)
 
     Function Choose() As IUIState

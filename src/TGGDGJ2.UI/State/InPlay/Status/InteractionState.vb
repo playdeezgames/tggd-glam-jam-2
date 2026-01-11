@@ -23,6 +23,9 @@ Friend Class InteractionState
         For Each verbType In world.Avatar.InteractionTarget.AvailableVerbs.Where(Function(x) x.CanPerform(world.Avatar))
             choices.Add(New Choice(verbType.Name, DoVerb(buffer, world, doEvent, verbType)))
         Next
+        If choices.Count = 1 Then
+            choices(0).Text = "Continue"
+        End If
         Return New Menu((0, 5), choices.ToArray, 0)
     End Function
 
