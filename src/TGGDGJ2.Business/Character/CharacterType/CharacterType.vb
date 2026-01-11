@@ -21,6 +21,7 @@
     Public MustOverride Sub Update(character As ICharacter) Implements ICharacterType.Update
     Public MustOverride Sub StartInteraction(character As ICharacter) Implements ICharacterType.StartInteraction
     Public MustOverride Sub Die(character As ICharacter) Implements ICharacterType.Die
+    Public MustOverride Sub Kill(character As ICharacter, victim As ICharacter) Implements ICharacterType.Kill
     Public MustOverride Function GetHue(character As ICharacter) As Integer Implements ICharacterType.GetHue
 
     Public Function CanEnter(character As ICharacter, location As ILocation) As Boolean Implements ICharacterType.CanEnter

@@ -25,8 +25,9 @@ Public Class AttackVerbType
     End Sub
 
     Private Sub DoAttack(attacker As ICharacter, defender As ICharacter)
-        Dim lines As New List(Of String)
-        lines.Add($"{attacker.Name} attacks {defender.Name}!")
+        Dim lines As New List(Of String) From {
+            $"{attacker.Name} attacks {defender.Name}!"
+        }
         Dim attack = attacker.GetAttackValue()
         lines.Add($"{attacker.Name} has an attack strength of {attack}!")
         Dim defend = defender.GetDefendValue()
@@ -41,6 +42,9 @@ Public Class AttackVerbType
         End If
         attacker.AddMessage($"COMBAT!", lines.ToArray)
         defender.AddMessage($"COMBAT!", lines.ToArray)
+        If defender.IsDead Then
+            attacker.Kill(defender)
+        End If
     End Sub
 
     Public Overrides Function CanPerform(character As ICharacter) As Boolean

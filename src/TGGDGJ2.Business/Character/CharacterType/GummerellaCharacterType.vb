@@ -13,6 +13,8 @@
         character.CreateCounter(Counters.Health, 100, 0, 100)
         character.CreateCounter(Counters.Attack, 0, 0, 0)
         character.CreateCounter(Counters.Defend, 0, 0, 0)
+        character.CreateCounter(Counters.XPLevel, 0, 0, Integer.MaxValue)
+        character.CreateCounter(Counters.XP, 0, 0, 100)
     End Sub
 
     Public Overrides ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
@@ -85,5 +87,32 @@
     End Function
 
     Public Overrides Sub Die(character As ICharacter)
+    End Sub
+
+    Public Overrides Sub Kill(character As ICharacter, victim As ICharacter)
+        Dim victimXpValue = If(victim.GetCounter(Counters.XP)?.Value, 0)
+        If victimXpValue > 0 Then
+            Dim characterXp = character.GetCounter(Counters.XP)
+            Dim characterXpLevel = character.GetCounter(Counters.XPLevel)
+            Dim lines As New List(Of String) From
+                {
+                    $"{character.Name} gains {victimXpValue} XP."
+                }
+            Dim levelsGained = 0
+            Dim nextXpValue = characterXp.Value + victimXpValue
+            While nextXpValue >= characterXp.Maximum
+                nextXpValue -= characterXp.Maximum
+                characterXp.Maximum *= 2
+                levelsGained += 1
+                characterXpLevel.Value += 1
+            End While
+            characterXp.Value = nextXpValue
+            If levelsGained > 0 Then
+                lines.Add($"{character.Name} gains {levelsGained} levels!")
+                lines.Add($"{character.Name} is now level {characterXpLevel.Value}.")
+            End If
+            lines.Add($"{character.Name} has {characterXp.Value}/{characterXp.Maximum} XP.")
+            character.AddMessage("XP Gained!", lines.ToArray)
+        End If
     End Sub
 End Class

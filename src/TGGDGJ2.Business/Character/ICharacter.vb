@@ -24,4 +24,5 @@
     Function GetAttackValue() As Integer
     Function GetDefendValue() As Integer
     Sub Die()
+    Sub Kill(defender As ICharacter)
 End Interface

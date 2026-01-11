@@ -201,4 +201,8 @@ Friend Class Character
     Public Sub Die() Implements ICharacter.Die
         EntityType.Die(Me)
     End Sub
+
+    Public Sub Kill(defender As ICharacter) Implements ICharacter.Kill
+        EntityType.Kill(Me, defender)
+    End Sub
 End Class

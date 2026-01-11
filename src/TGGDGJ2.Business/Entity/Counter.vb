@@ -28,10 +28,13 @@ Friend Class Counter
         End Set
     End Property
 
-    Public ReadOnly Property Maximum As Integer Implements ICounter.Maximum
+    Public Property Maximum As Integer Implements ICounter.Maximum
         Get
             Return CounterData.Maximum
         End Get
+        Set(value As Integer)
+            CounterData.Maximum = value
+        End Set
     End Property
 
     Public ReadOnly Property Minimum As Integer Implements ICounter.Minimum

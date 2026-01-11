@@ -21,6 +21,7 @@ Friend Class SlugCharacterType
 
     Public Overrides Sub Initialize(character As ICharacter)
         character.CreateCounter(Counters.Health, 10, 0, 10)
+        character.CreateCounter(Counters.XP, 5, 5, 5)
     End Sub
 
     Public Overrides Sub AddMessage(character As ICharacter, title As String, ParamArray lines() As String)
@@ -65,4 +66,7 @@ Friend Class SlugCharacterType
             "It is gooey and sluggy.",
             "It looks fairly harmless and entirely smushable."}
     End Function
+
+    Public Overrides Sub Kill(character As ICharacter, victim As ICharacter)
+    End Sub
 End Class

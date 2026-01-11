@@ -12,5 +12,6 @@
     Function GetName(character As ICharacter) As String
     Function GetDescription(character As ICharacter) As IEnumerable(Of String)
     Sub Die(character As ICharacter)
+    Sub Kill(character As ICharacter, victim As ICharacter)
     ReadOnly Property VerbTypes As IEnumerable(Of IVerbType)
 End Interface
