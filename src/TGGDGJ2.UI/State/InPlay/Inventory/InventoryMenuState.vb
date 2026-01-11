@@ -13,6 +13,9 @@ Friend Class InventoryMenuState
                   doEvent As Action(Of String()))
         MyBase.New(buffer, world, doEvent)
         menu = CreateMenu(world)
+        menu.Position = ((buffer.Columns - menu.Columns) \ 2, (buffer.Rows - menu.Rows) \ 2)
+        frame.Box(0, 0, buffer.Columns, 3, True)
+        frame.Box(menu.Position.Column - 1, menu.Position.Row - 1, menu.Columns + 2, menu.Rows + 2, True)
     End Sub
 
     Private Function CreateMenu(world As Business.IWorld) As Menu
@@ -35,7 +38,9 @@ Friend Class InventoryMenuState
 
     Public Overrides Sub Refresh()
         buffer.Fill(32)
+        buffer.WriteCenteredText(1, "Inventory", 0)
         menu.Render(buffer)
+        buffer.DrawFrame((0, 0), frame)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

@@ -7,7 +7,7 @@
 
     Public Overrides ReadOnly Property Name As String
         Get
-            Return "Insert(into butt)"
+            Return "Insert(into bum)"
         End Get
     End Property
 
