@@ -9,6 +9,9 @@ Friend Class ActionMenuState
         MyBase.New(buffer, world, doEvent)
         Dim menuChoices = GenerateChoices(buffer, world, doEvent)
         Me.menu = New Menu((0, 0), menuChoices.ToArray, 0)
+        menu.Position = ((buffer.Columns - menu.Columns) \ 2, (buffer.Rows - menu.Rows) \ 2)
+        frame.Box(0, 0, buffer.Columns, 3, True)
+        frame.Box(menu.Position.Column - 1, menu.Position.Row - 1, menu.Columns + 2, menu.Rows + 2, True)
     End Sub
 
     Private Shared Function GenerateChoices(buffer As IUIBuffer(Of Integer), world As Business.IWorld, doEvent As Action(Of String())) As IEnumerable(Of Choice)
@@ -27,7 +30,9 @@ Friend Class ActionMenuState
 
     Public Overrides Sub Refresh()
         buffer.Fill(32)
+        buffer.WriteCenteredText(1, "Action Menu", 0)
         menu.Render(buffer)
+        buffer.DrawFrame((0, 0), frame)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

@@ -4,6 +4,16 @@ Friend Class Menu
     Private ReadOnly choices As Choice()
     Property Position As (Column As Integer, Row As Integer)
     Private choiceIndex As Integer
+    ReadOnly Property Columns As Integer
+        Get
+            Return choices.Max(Function(x) x.Text.Length + 1)
+        End Get
+    End Property
+    ReadOnly Property Rows As Integer
+        Get
+            Return choices.Length
+        End Get
+    End Property
 
     Sub New(position As (Column As Integer, Row As Integer), choices As Choice(), choiceIndex As Integer)
         Me.choices = choices
