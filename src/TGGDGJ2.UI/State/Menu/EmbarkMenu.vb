@@ -13,7 +13,7 @@ Friend Class EmbarkMenu
 
     Public Overrides Sub Refresh()
         buffer.Fill(32)
-        buffer.WriteText((0, 0), "Press <SPACE> to Embark!", 0)
+        buffer.WriteCenteredText(buffer.Rows \ 2, "Press <SPACE> to Embark!", 0)
     End Sub
 
     Public Overrides Function HandleCommand(command As String) As IUIState

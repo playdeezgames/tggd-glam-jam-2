@@ -61,6 +61,7 @@ Public Class World
         For Each mapType In initializationList
             CreateMap(mapType, context)
         Next
+        Avatar.InteractionTarget = Avatar
     End Sub
 
     Public Function CreateMap(mapType As IMapType, context As Dictionary(Of String, Object)) As IMap Implements IWorld.CreateMap
