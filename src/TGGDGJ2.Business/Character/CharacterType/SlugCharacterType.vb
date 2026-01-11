@@ -1,4 +1,6 @@
-﻿Friend Class SlugCharacterType
+﻿Imports TGGD.Business
+
+Friend Class SlugCharacterType
     Inherits CharacterType
 
 
@@ -24,7 +26,21 @@
     Public Overrides Sub AddMessage(character As ICharacter, title As String, ParamArray lines() As String)
     End Sub
 
+    Private Shared ReadOnly directionTable As IReadOnlyDictionary(Of String, Integer) =
+        New Dictionary(Of String, Integer) From
+        {
+            {String.Empty, 4},
+            {Direction.North, 1},
+            {Direction.South, 1},
+            {Direction.East, 1},
+            {Direction.West, 1}
+        }
+
     Public Overrides Sub Update(character As ICharacter)
+        Dim direction = RNG.FromGenerator(directionTable)
+        If Not String.IsNullOrEmpty(direction) Then
+            character.TryMove(direction)
+        End If
     End Sub
 
     Public Overrides Sub StartInteraction(character As ICharacter)
