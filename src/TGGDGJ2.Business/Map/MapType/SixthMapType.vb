@@ -21,7 +21,7 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#                              #",
+                "#    !                         #",
                 "#                              #",
                 "################################"
             })
@@ -33,8 +33,21 @@
                 CreateNorthDoor(location, context)
             Case "x"c
                 CreateNorthDestination(location, context)
+            Case "!"c
+                CreateSign(location)
         End Select
     End Sub
+
+    Private Sub CreateSign(location As ILocation)
+        Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
+        trigger.SetMessage(
+            "You Win!",
+            "You made it this far.",
+            "So yer unlikely to be discouraged.",
+            "Let's just say you win.")
+        location.BumpTrigger = trigger
+    End Sub
+
 
     Private Sub CreateNorthDestination(location As ILocation, context As Dictionary(Of String, Object))
         CType(context(FifthRoomSouthDoor), ILocation).BumpTrigger.Destination = location
@@ -56,6 +69,7 @@
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
         Return If(gridCell = "#"c, WallLocationType.Instance,
             If(gridCell = "+"c, UnlockedDoorLocationType.Instance,
-            FloorLocationType.Instance))
+            If(gridCell = "!"c, SignLocationType.Instance,
+            FloorLocationType.Instance)))
     End Function
 End Class
