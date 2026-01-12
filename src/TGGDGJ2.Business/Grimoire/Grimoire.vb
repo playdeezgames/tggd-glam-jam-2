@@ -7,4 +7,6 @@
     Friend ReadOnly ThirdRoomNorthDoor As String = NameOf(ThirdRoomNorthDoor)
     Friend ReadOnly FourthRoomWestDestination As String = NameOf(FourthRoomWestDestination)
     Friend ReadOnly FourthRoomWestDoor As String = NameOf(FourthRoomWestDoor)
+    Friend ReadOnly FifthRoomSouthDestination As String = NameOf(FifthRoomSouthDestination)
+    Friend ReadOnly FifthRoomSouthDoor As String = NameOf(FifthRoomSouthDoor)
 End Module

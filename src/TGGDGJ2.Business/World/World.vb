@@ -47,12 +47,17 @@ Public Class World
         End Get
     End Property
 
+    '54
+    '63
+    '12
+
     Private Shared ReadOnly initializationList As IEnumerable(Of IMapType) = {
             FirstMapType.Instance,
             SecondMapType.Instance,
             ThirdMapType.Instance,
             FourthMapType.Instance,
-            FifthMapType.Instance
+            FifthMapType.Instance,
+            SixthMapType.Instance
         }
 
     Public Sub Initialize() Implements IWorld.Initialize
@@ -118,7 +123,8 @@ Public Class World
             SecondMapType.Instance,
             ThirdMapType.Instance,
             FourthMapType.Instance,
-            FifthMapType.Instance
+            FifthMapType.Instance,
+            SixthMapType.Instance
         }.ToDictionary(Function(x) x.MapTypeName, Function(x) x)
 
     Private Shared ReadOnly itemTypes As IReadOnlyDictionary(Of String, IItemType) =

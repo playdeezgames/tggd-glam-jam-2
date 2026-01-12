@@ -22,8 +22,8 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#s                            s#",
-                "################################"
+                "#s             .              s#",
+                "###############^################"
             })
     End Sub
 
@@ -35,7 +35,20 @@
                 CreateEastDestination(location, context)
             Case "!"c
                 CreateSign(location)
+            Case "^"c
+                CreateSouthDoor(location, context)
+            Case "."c
+                CreateSouthDestination(location, context)
         End Select
+    End Sub
+
+    Private Sub CreateSouthDestination(location As ILocation, context As Dictionary(Of String, Object))
+        context(Grimoire.FifthRoomSouthDestination) = location
+    End Sub
+
+    Private Sub CreateSouthDoor(location As ILocation, context As Dictionary(Of String, Object))
+        context(Grimoire.FifthRoomSouthDoor) = location
+        location.BumpTrigger = location.CreateTrigger(TeleportTriggerType.Instance)
     End Sub
 
     Private Sub CreateSign(location As ILocation)
@@ -69,7 +82,7 @@
 
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
         Return If(gridCell = "#"c, WallLocationType.Instance,
-            If(gridCell = "+"c, UnlockedDoorLocationType.Instance,
+            If(gridCell = "+"c OrElse gridCell = "^"c, UnlockedDoorLocationType.Instance,
             If(gridCell = "!"c, SignLocationType.Instance,
             FloorLocationType.Instance)))
     End Function
