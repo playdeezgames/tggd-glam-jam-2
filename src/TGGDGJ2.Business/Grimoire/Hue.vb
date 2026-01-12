@@ -14,4 +14,5 @@
     Friend Const KNIFE = 194
     Friend Const POTION = 195
     Friend Const SHIELD = 196
+    Friend Const SNOT = 197
 End Module

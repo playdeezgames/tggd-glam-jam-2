@@ -15,7 +15,7 @@
                 "#                              #",
                 "#                              #",
                 "#                              #",
-                "#                             x+",
+                "#              !              x+",
                 "#                              #",
                 "#                              #",
                 "#                              #",
@@ -33,7 +33,21 @@
                 CreateEastDoor(location, context)
             Case "x"c
                 CreateEastDestination(location, context)
+            Case "!"c
+                CreateSign(location)
         End Select
+    End Sub
+
+    Private Sub CreateSign(location As ILocation)
+        Dim trigger = location.CreateTrigger(MessageTriggerType.Instance)
+        trigger.SetMessage(
+            "Slugs! GROSS!",
+            "What are all these slugs doing here?",
+            "You should slay all imediately.",
+            "No, they don't fight back, so this is kind of a genocide.",
+            "But they drop snot.",
+            "And who doesn't want to collect snot?")
+        location.BumpTrigger = trigger
     End Sub
 
     Private Shared Sub CreateEastDestination(location As ILocation, context As Dictionary(Of String, Object))
@@ -56,6 +70,7 @@
     Protected Overrides Function GetLocationType(gridCell As Char) As ILocationType
         Return If(gridCell = "#"c, WallLocationType.Instance,
             If(gridCell = "+"c, UnlockedDoorLocationType.Instance,
-            FloorLocationType.Instance))
+            If(gridCell = "!"c, SignLocationType.Instance,
+            FloorLocationType.Instance)))
     End Function
 End Class

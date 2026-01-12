@@ -48,6 +48,7 @@ Friend Class SlugCharacterType
     End Sub
 
     Public Overrides Sub Die(character As ICharacter)
+        character.Location.CreateItem(SnotItemType.Instance)
         character.Location.Character = Nothing
         character.Destroy()
     End Sub
